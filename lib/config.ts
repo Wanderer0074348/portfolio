@@ -5,7 +5,7 @@
 export const siteConfig = {
   // ── Identity ───────────────────────────────────────────────────────────────
   name: "Tanay Matta",
-  handle: "TANAY_OS_V1",
+  handle: "TANYA_BOT",
   title: "AI_ENGINEER IN_TRAINING",
   subjectId: "BE Computer Science",
   status: "FINAL_YEAR_STUDENT",

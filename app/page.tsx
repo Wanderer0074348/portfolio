@@ -3,6 +3,9 @@ import Footer from "./components/Footer";
 import TypewriterText from "./components/TypewriterText";
 import TerminalTrigger from "./components/TerminalTrigger";
 import TerminalLauncher from "./components/TerminalLauncher";
+import SlideUpSection from "./components/SlideUpSection";
+import HeroContent from "./components/HeroContent";
+import DinoRunner from "./components/DinoRunner";
 import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import { siteConfig } from "@/lib/config";
 
@@ -17,7 +20,6 @@ const imgInspectArrow = "https://www.figma.com/api/mcp/asset/56825ccb-3aed-459d-
 const imgGlobeIcon = "https://www.figma.com/api/mcp/asset/2168fbe8-a6ad-464e-bfb9-25da9249403a";
 const imgQRIcon = "https://www.figma.com/api/mcp/asset/b0d6b8a2-f78d-482f-b291-5b0d102a3445";
 
-const { name, focus, education } = siteConfig;
 
 export default function Home() {
   return (
@@ -25,7 +27,12 @@ export default function Home() {
       <Header />
 
       {/* ── Hero Section ── */}
-      <section className="bg-black border-b-[6px] border-black pt-[176px] pb-[86px] px-6 relative overflow-hidden">
+      <section className="bg-black border-b-[6px] border-black pt-[48px] pb-[86px] px-6 relative overflow-hidden sticky top-0 z-10 min-h-screen">
+        <div className="max-w-[1440px] mx-auto mb-6 relative z-10">
+          <h2 className="font-[family-name:var(--font-display)] font-bold text-white text-[160px] tracking-[-8px] uppercase leading-[1] whitespace-nowrap">
+            Hey, I&apos;m <span className="text-[#034694]">Tanay</span>
+          </h2>
+        </div>
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
           <PixelatedCanvas
             src={HERO_IMG}
@@ -47,43 +54,7 @@ export default function Home() {
             fill
           />
         </div>
-        <div className="max-w-[1440px] mx-auto relative flex gap-12 items-start">
-
-          {/* Terminal Block */}
-          <div className="w-[476px] shrink-0">
-            <div className="bg-[#171717] border-[4px] border-white flex flex-col gap-4 p-7 shadow-[8px_8px_0px_0px_black]">
-              <div className="border-b-2 border-[#404040] pb-2.5 flex gap-2 items-center">
-                <div className="bg-[#ba1a1a] rounded-full size-3 shrink-0" />
-                <div className="bg-[#034694] rounded-full size-3 shrink-0" />
-                <span className="font-mono text-[#a3a3a3] text-xs tracking-[1.2px] uppercase">
-                  System_Log_v4.2
-                </span>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-1 font-mono text-sm">
-                  <span className="font-bold text-[#034694]">&gt;</span>
-                  <span className="text-[#f3f3f3]"> STATUS: </span>
-                  <span className="bg-[#034694] px-2 text-white">FINAL_YEAR_ACTIVE</span>
-                </div>
-                <div className="font-mono text-sm">
-                  <span className="font-bold text-[#034694]">&gt;</span>
-                  <span className="text-[#f3f3f3]"> OBJECTIVE: DEPLOY_AI_ENGINEER_V1</span>
-                </div>
-                <div className="font-mono text-sm">
-                  <span className="font-bold text-[#034694]">&gt;</span>
-                  <span className="text-[#f3f3f3]"> FOCUS: {focus.join(", ").toUpperCase()}</span>
-                </div>
-                <p className="font-mono text-[#a3a3a3] text-sm leading-5">
-                  {name}. {education.degree} @<br />
-                  {education.institution.split(",")[0]}.<br />
-                  CGPA: {education.cgpa}. Command the future.
-                </p>
-                <a href="/terminal" className="bg-white border-2 border-white mt-2 w-fit px-[26px] py-[14px] font-mono font-bold text-black text-sm tracking-[1.4px] uppercase">
-                  View_Objectives
-                </a>
-              </div>
-            </div>
-          </div>
+        <HeroContent>
 
           {/* Typography Block */}
           <div className="flex flex-col gap-4 flex-1">
@@ -101,11 +72,12 @@ export default function Home() {
             </p>
           </div>
 
-        </div>
+        </HeroContent>
+        <DinoRunner />
       </section>
 
       {/* ── Featured Projects / Bento Grid ── */}
-      <section className="bg-[#f9f9f9] px-6 py-24">
+      <SlideUpSection className="bg-[#f9f9f9] px-6 py-24 relative z-20">
         <div className="max-w-[1440px] mx-auto flex flex-col gap-16">
 
           {/* Section header */}
@@ -236,10 +208,10 @@ export default function Home() {
 
           </div>
         </div>
-      </section>
+      </SlideUpSection>
 
       {/* ── CTA Section — Terminal Focus Zone ── */}
-      <section className="bg-black px-6 py-24 overflow-hidden">
+      <section className="bg-black px-6 py-24 overflow-hidden sticky top-0 z-30 min-h-screen flex items-center">
         <div className="max-w-[1440px] mx-auto flex flex-col items-center">
 
           <div className="mb-6">
@@ -294,7 +266,9 @@ export default function Home() {
         </div>
       </section>
 
-      <Footer />
+      <div className="relative z-40">
+        <Footer />
+      </div>
 
     </div>
   );

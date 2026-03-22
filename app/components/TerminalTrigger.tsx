@@ -9,7 +9,7 @@ export default function TerminalTrigger() {
       onClick={open}
       className="font-[family-name:var(--font-display)] font-bold text-[#034694] tracking-tight hover:underline underline-offset-4 cursor-pointer"
     >
-      Tanay_OS_V1!
+      Tanya_Bot!
     </button>
   );
 }

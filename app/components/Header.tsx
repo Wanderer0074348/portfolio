@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useChatModal } from "./ChatProvider";
 
 const navLinks = [
@@ -12,9 +13,27 @@ const navLinks = [
 export default function Header() {
   const pathname = usePathname();
   const { toggle } = useChatModal();
+  const isHome = pathname === "/";
+  const [visible, setVisible] = useState(!isHome);
+
+  useEffect(() => {
+    if (!isHome) { setVisible(true); return; }
+
+    const onScroll = () => {
+      setVisible(window.scrollY > window.innerHeight * 0.65);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#fafafa] border-b-[4px] border-black">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 bg-[#fafafa] border-b-[4px] border-black transition-transform duration-300 ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div className="max-w-[1440px] mx-auto px-6 py-4 flex items-center justify-between">
         <Link
           href="/"
@@ -44,7 +63,7 @@ export default function Header() {
           onClick={toggle}
           className="bg-[#034694] border-[4px] border-black px-7 py-3 font-[family-name:var(--font-display)] font-bold text-base text-white tracking-[-0.8px] uppercase shadow-[4px_4px_0px_0px_black] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
         >
-          Chat with Tanay_OS_V1
+          Chat with Tanya_Bot
         </button>
       </div>
     </header>

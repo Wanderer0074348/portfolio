@@ -13,8 +13,8 @@ interface TypewriterTextProps {
 export default function TypewriterText({
   words,
   className,
-  typingSpeed = 140,
-  deletingSpeed = 90,
+  typingSpeed = 210,
+  deletingSpeed = 180,
   pauseMs = 2800,
 }: TypewriterTextProps) {
   const [displayed, setDisplayed] = useState("");
