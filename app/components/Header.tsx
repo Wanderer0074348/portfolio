@@ -44,7 +44,7 @@ export default function Header() {
           onClick={toggle}
           className="bg-[#034694] border-[4px] border-black px-7 py-3 font-[family-name:var(--font-display)] font-bold text-base text-white tracking-[-0.8px] uppercase shadow-[4px_4px_0px_0px_black] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
         >
-          Chat with AI_
+          Chat with Tanay_OS_V1
         </button>
       </div>
     </header>

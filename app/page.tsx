@@ -1,6 +1,13 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import TypewriterText from "./components/TypewriterText";
+import TerminalTrigger from "./components/TerminalTrigger";
+import TerminalLauncher from "./components/TerminalLauncher";
+import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import { siteConfig } from "@/lib/config";
+
+const HERO_IMG =
+  "/hero.png";
 
 const imgDigitalGridArchitecture = "https://www.figma.com/api/mcp/asset/94856324-3b83-4e31-a78d-f57d923d6f3a";
 const imgViewAllArrow = "https://www.figma.com/api/mcp/asset/bd32461d-b298-4312-9757-f69db85fc549";
@@ -10,7 +17,7 @@ const imgInspectArrow = "https://www.figma.com/api/mcp/asset/56825ccb-3aed-459d-
 const imgGlobeIcon = "https://www.figma.com/api/mcp/asset/2168fbe8-a6ad-464e-bfb9-25da9249403a";
 const imgQRIcon = "https://www.figma.com/api/mcp/asset/b0d6b8a2-f78d-482f-b291-5b0d102a3445";
 
-const { name, title, focus, education, contact, skills } = siteConfig;
+const { name, focus, education } = siteConfig;
 
 export default function Home() {
   return (
@@ -19,13 +26,27 @@ export default function Home() {
 
       {/* ── Hero Section ── */}
       <section className="bg-black border-b-[6px] border-black pt-[176px] pb-[86px] px-6 relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{
-            backgroundImage:
-              "url('data:image/svg+xml;utf8,<svg viewBox=\"0 0 1280 616\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"none\"><rect x=\"0\" y=\"0\" height=\"100%25\" width=\"100%25\" fill=\"url(%23grad)\" opacity=\"1\"/><defs><radialGradient id=\"grad\" gradientUnits=\"userSpaceOnUse\" cx=\"0\" cy=\"0\" r=\"10\" gradientTransform=\"matrix(90.51 0 0 43.558 640 308)\"><stop stop-color=\"rgba(255,255,255,1)\" offset=\"0.035355\"/><stop stop-color=\"rgba(255,255,255,0)\" offset=\"0.035355\"/></radialGradient></defs></svg>')",
-          }}
-        />
+        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+          <PixelatedCanvas
+            src={HERO_IMG}
+            width={1920}
+            height={900}
+            cellSize={4}
+            dotScale={0.9}
+            shape="square"
+            backgroundColor="#000000"
+            dropoutStrength={0.1}
+            interactive
+            distortionStrength={0.1}
+            distortionRadius={200}
+            distortionMode="repel"
+            followSpeed={0.2}
+            jitterStrength={4}
+            jitterSpeed={1}
+            sampleAverage
+            fill
+          />
+        </div>
         <div className="max-w-[1440px] mx-auto relative flex gap-12 items-start">
 
           {/* Terminal Block */}
@@ -73,12 +94,10 @@ export default function Home() {
               <div className="bg-white flex-1 h-1" />
             </div>
             <h1 className="font-[family-name:var(--font-display)] font-bold text-[#034694] text-[128px] tracking-[-6.4px] uppercase leading-[1]">
-              {title.split(" ").slice(0, 1).join("")}<br />{title.split(" ").slice(1).join("_")}
+              AI_<TypewriterText words={["STUDENT", "ENGINEER"]} />
             </h1>
             <p className="font-sans font-light text-[#d4d4d4] text-2xl leading-8 max-w-[512px] pt-4">
-              Specializing in {focus[0]} and {focus[1]}.<br />
-              Engineering the next generation of intelligent<br />
-              systems. {education.institution.split(",")[0]}, CGPA {education.cgpa}.
+              Hello! I'm Tanay, an aspiring AI Engineer with a passion for building agentic systems! <br/> Glad to have you here. Dive in to explore my work, or just ask <TerminalTrigger />
             </p>
           </div>
 
@@ -252,19 +271,7 @@ export default function Home() {
           </div>
 
           {/* Input + Button */}
-          <div className="flex gap-6 items-stretch w-full max-w-[672px] mb-16">
-            <div className="flex-1 border-[4px] border-white flex items-center p-2">
-              <span className="font-mono font-bold text-[#034694] text-base px-4">&gt;</span>
-              <input
-                type="text"
-                placeholder="Enter_Access_Code..."
-                className="flex-1 bg-transparent font-mono text-[#404040] text-base uppercase outline-none px-3 py-2.5 placeholder:text-[#404040]"
-              />
-            </div>
-            <button className="bg-[#034694] border-[4px] border-black px-11 py-5 font-[family-name:var(--font-display)] font-bold text-white text-xl tracking-[2px] uppercase shadow-[8px_8px_0px_0px_black] shrink-0">
-              Initiate_Mission
-            </button>
-          </div>
+          <TerminalLauncher />
 
           {/* Stats */}
           <div className="grid grid-cols-4 gap-12">

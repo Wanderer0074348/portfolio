@@ -31,12 +31,14 @@ interface ChatContextValue {
   open: () => void;
   close: () => void;
   toggle: () => void;
+  openWithCommand: (cmd: string) => void;
 }
 
 const ChatContext = createContext<ChatContextValue>({
   open: () => {},
   close: () => {},
   toggle: () => {},
+  openWithCommand: () => {},
 });
 
 export function useChatModal() {
@@ -213,7 +215,7 @@ function UserMessage({ msg }: { msg: Message }) {
 
 // ─── Modal ────────────────────────────────────────────────────────────────────
 
-function ChatModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+function ChatModal({ isOpen, onClose, pendingCommand, onPendingConsumed }: { isOpen: boolean; onClose: () => void; pendingCommand: string | null; onPendingConsumed: () => void }) {
   const [messages, setMessages] = useState<Message[]>(() => [
     { ...BOOT, timestamp: timestamp() },
   ]);
@@ -229,6 +231,16 @@ function ChatModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
       setTimeout(() => inputRef.current?.focus(), 50);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen && pendingCommand) {
+      const t = setTimeout(() => {
+        submit(pendingCommand);
+        onPendingConsumed();
+      }, 300);
+      return () => clearTimeout(t);
+    }
+  }, [isOpen, pendingCommand]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -396,17 +408,27 @@ function ChatModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
 
 export default function ChatProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [pendingCommand, setPendingCommand] = useState<string | null>(null);
 
   const ctx: ChatContextValue = {
     open:   () => setIsOpen(true),
     close:  () => setIsOpen(false),
     toggle: () => setIsOpen((v) => !v),
+    openWithCommand: (cmd: string) => {
+      setPendingCommand(cmd);
+      setIsOpen(true);
+    },
   };
 
   return (
     <ChatContext.Provider value={ctx}>
       {children}
-      <ChatModal isOpen={isOpen} onClose={ctx.close} />
+      <ChatModal
+        isOpen={isOpen}
+        onClose={ctx.close}
+        pendingCommand={pendingCommand}
+        onPendingConsumed={() => setPendingCommand(null)}
+      />
     </ChatContext.Provider>
   );
 }

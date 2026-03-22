@@ -7,7 +7,7 @@ export const siteConfig = {
   name: "Tanay Matta",
   handle: "TANAY_OS_V1",
   title: "AI_ENGINEER IN_TRAINING",
-  subjectId: "ACAD-8812",
+  subjectId: "BE Computer Science",
   status: "FINAL_YEAR_STUDENT",
   clearance: "AI_ENGINEER_CANDIDATE",
   vector: "Generative AI & Agentic Systems",
