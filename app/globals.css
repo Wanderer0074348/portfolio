@@ -10,6 +10,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-space-grotesk);
+  --font-code: var(--font-jetbrains-mono);
+  --font-data: var(--font-roboto-mono);
 }
 
 @media (prefers-color-scheme: dark) {
