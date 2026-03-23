@@ -53,7 +53,7 @@ export default function CustomCursor() {
       id="custom-cursor"
       data-pointer="0"
       className="fixed top-0 left-0 z-[9999] pointer-events-none select-none"
-      style={{ willChange: "transform", mixBlendMode: "difference" }}
+      style={{ willChange: "transform" }}
     >
       <svg
         id="cursor-arrow"
@@ -62,20 +62,20 @@ export default function CustomCursor() {
       >
         <path
           d="M4 2 L4 22 L9 16 L13.5 25 L16.5 23.5 L12 14.5 L19 14.5 Z"
-          fill="white" stroke="white" strokeWidth="0.5" strokeLinejoin="round"
+          fill="white" stroke="black" strokeWidth="1.2" strokeLinejoin="round"
         />
       </svg>
 
+      {/* Standard OS-style pointer hand */}
       <svg
         id="cursor-pointer"
         width="28" height="28" viewBox="0 0 28 28" fill="none"
-        style={{ position: "absolute", top: 0, left: 0, display: "none" }}
+        style={{ position: "absolute", top: 0, left: 0 }}
       >
         <path
-          d="M4 2 L4 22 L9 16 L13.5 25 L16.5 23.5 L12 14.5 L19 14.5 Z"
-          fill="white" stroke="white" strokeWidth="0.5" strokeLinejoin="round"
+          d="M10 13V5.5a1.5 1.5 0 0 1 3 0V12h.5V4a1.5 1.5 0 0 1 3 0v8h.5V6a1.5 1.5 0 0 1 3 0v6h.5v-3a1.5 1.5 0 0 1 3 0v7c0 4-2.5 6.5-6.5 6.5h-1C12 22.5 9 20 8 16.5L6.2 12a1.6 1.6 0 0 1 2.4-2L10 12v1Z"
+          fill="white" stroke="black" strokeWidth="1.2" strokeLinejoin="round" strokeLinecap="round"
         />
-        <circle cx="22" cy="6" r="3" fill="white" />
       </svg>
     </div>
   );
