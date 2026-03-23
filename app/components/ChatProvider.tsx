@@ -9,6 +9,7 @@ import {
   KeyboardEvent,
   ReactNode,
 } from "react";
+import { marked } from "@/lib/marked-terminal";
 import { siteConfig } from "@/lib/config";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -22,7 +23,13 @@ interface Message {
   role: "agent" | "user";
   command?: string;
   lines?: OutputLine[];
+  markdown?: string;
   timestamp: string;
+}
+
+interface ApiHistoryEntry {
+  role: "user" | "assistant";
+  content: string;
 }
 
 // ─── Context ──────────────────────────────────────────────────────────────────
@@ -45,102 +52,11 @@ export function useChatModal() {
   return useContext(ChatContext);
 }
 
-// ─── Commands ─────────────────────────────────────────────────────────────────
+// ─── Config ───────────────────────────────────────────────────────────────────
 
-const { name, subjectId, status, clearance, vector, focus, skills, experience, projects, contact, education, achievements } = siteConfig;
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
-const COMMANDS: Record<string, () => OutputLine[]> = {
-  help: () => [
-    { type: "system", text: "━━━ AVAILABLE COMMANDS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" },
-    { type: "info",   text: "  help          — List all available commands" },
-    { type: "info",   text: "  whoami        — Display subject identity" },
-    { type: "info",   text: "  status        — Check system status" },
-    { type: "info",   text: "  about         — Operational summary" },
-    { type: "info",   text: "  skills        — Loaded capability modules" },
-    { type: "info",   text: "  missions      — Active project dossiers" },
-    { type: "info",   text: "  contact       — Open secure channel" },
-    { type: "info",   text: "  ls            — List directory" },
-    { type: "info",   text: "  clear         — Wipe session log" },
-    { type: "system", text: "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" },
-  ],
-
-  whoami: () => [
-    { type: "success", text: "> IDENTITY VERIFIED" },
-    { type: "output",  text: `  HANDLE     : ${name}` },
-    { type: "output",  text: `  SUBJECT_ID : ${subjectId}` },
-    { type: "output",  text: `  STATUS     : ${status}` },
-    { type: "output",  text: `  CLEARANCE  : ${clearance}` },
-    { type: "output",  text: `  VECTOR     : ${vector}` },
-    { type: "output",  text: `  CGPA       : ${education.cgpa} // ${education.institution.split(",")[0]}` },
-  ],
-
-  status: () => [
-    { type: "system",  text: "> RUNNING SYSTEM_DIAGNOSTICS..." },
-    { type: "success", text: `  [OK]  ${skills.aiml[0].toUpperCase().replace(/ /g, "_").padEnd(22)} — LOADED` },
-    { type: "success", text: `  [OK]  ${skills.aiml[1].toUpperCase().replace(/ /g, "_").padEnd(22)} — ACTIVE` },
-    { type: "success", text: `  [OK]  ${skills.languages[0].toUpperCase().padEnd(22)} — ARMED` },
-    { type: "success", text: `  [OK]  ${skills.languages[1].toUpperCase().padEnd(22)} — ACTIVE` },
-    { type: "success", text: `  [OK]  ${skills.devops[0].toUpperCase().padEnd(22)} — NOMINAL` },
-    { type: "info",    text: "  [--]  SOFT_SKILLS_MODULE       — NOT FOUND" },
-    { type: "output",  text: `  HACKATHON    : ${achievements[0].title.toUpperCase()}` },
-    { type: "output",  text: `  CURRENT_ROLE : ${experience[0].org.toUpperCase()} // ${experience[0].location.toUpperCase()}` },
-    { type: "output",  text: `  PROJECTS     : ${projects.length} OPERATIONAL` },
-  ],
-
-  about: () => [
-    { type: "system", text: `> LOADING DOSSIER FOR ${name.toUpperCase()}...` },
-    { type: "output", text: "" },
-    { type: "output", text: `  ${education.degree}` },
-    { type: "output", text: `  ${education.institution}` },
-    { type: "output", text: `  CGPA: ${education.cgpa} · ${education.period}` },
-    { type: "output", text: "" },
-    { type: "info",   text: `  FOCUS: ${focus.join(" · ")}` },
-    { type: "output", text: "" },
-    { type: "output", text: `  Currently: ${experience[0].title} @ ${experience[0].org}` },
-    { type: "output", text: `  ${experience[0].bullets[0].slice(0, 72)}...` },
-  ],
-
-  skills: () => [
-    { type: "system", text: "> ENUMERATING CAPABILITY_MODULES..." },
-    { type: "info",   text: `  LANGUAGES  : ${skills.languages.join(", ")}` },
-    { type: "info",   text: `  AI/ML      : ${skills.aiml.join(", ")}` },
-    { type: "info",   text: `  BACKEND    : ${skills.backend.join(", ")}` },
-    { type: "info",   text: `  DATA       : ${skills.data.join(", ")}` },
-    { type: "info",   text: `  DEVOPS     : ${skills.devops.join(", ")}` },
-    { type: "info",   text: `  ANALYTICS  : ${skills.analytics.join(", ")}` },
-  ],
-
-  missions: () => [
-    { type: "system", text: "> RETRIEVING ACTIVE_DOSSIERS..." },
-    { type: "output", text: "" },
-    ...projects.flatMap((p) => [
-      { type: "success" as const, text: `  [${p.title.toUpperCase()}]` },
-      { type: "output"  as const, text: `  ${p.sector} · ${p.ref} · ${p.meta}` },
-      { type: "output"  as const, text: `  Stack: ${p.stack.slice(0, 4).join(", ")}` },
-      { type: "output"  as const, text: "" },
-    ]),
-  ],
-
-  contact: () => [
-    { type: "system",  text: "> OPENING SECURE_CHANNEL..." },
-    { type: "success", text: "  [OK] Channel established. Encryption: 128-BIT" },
-    { type: "output",  text: "" },
-    { type: "info",    text: `  EMAIL    : ${contact.email}` },
-    { type: "info",    text: `  GITHUB   : ${contact.github}` },
-    { type: "info",    text: `  LINKEDIN : ${contact.linkedin}` },
-    ...(contact.phone ? [{ type: "info" as const, text: `  PHONE    : ${contact.phone}` }] : []),
-    { type: "output",  text: "" },
-    { type: "output",  text: "  All communications are logged and encrypted." },
-  ],
-
-  ls: () => [
-    { type: "system", text: "> SCANNING DIRECTORY..." },
-    { type: "output", text: "  drwxr-xr-x  /missions    — Active project dossiers" },
-    { type: "output", text: "  drwxr-xr-x  /dossier     — Academic profile" },
-    { type: "output", text: `  -rw-r--r--  resume.pdf   — ${name}, CGPA ${education.cgpa}` },
-    { type: "output", text: "  -rw-r--r--  neural.bin   — [CLASSIFIED]" },
-  ],
-};
+const { name, education } = siteConfig;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -161,9 +77,10 @@ const BOOT: Omit<Message, "timestamp"> = {
   lines: [
     { type: "success", text: "Authenticated. TANAY_OS_V1 kernel loaded." },
     { type: "output",  text: `${name} · ${education.institution.split(",")[0]}` },
-    { type: "output",  text: 'Type "help" for available commands.' },
+    { type: "output",  text: "AI systems online. Ask me anything about Tanay." },
   ],
 };
+
 
 // ─── Message sub-components ───────────────────────────────────────────────────
 
@@ -181,11 +98,18 @@ function AgentMessage({ msg }: { msg: Message }) {
           <span className="font-[family-name:var(--font-display)] font-bold text-[#034694] text-base tracking-[-0.9px] uppercase">
             AGENT_TERMINAL_V4:
           </span>
-          {msg.lines?.map((line, i) => (
-            <p key={i} className={`font-[family-name:var(--font-code)] text-sm leading-[1.625] whitespace-pre ${LINE_COLOR[line.type]}`}>
-              {line.text}
-            </p>
-          ))}
+          {msg.markdown != null ? (
+            <div
+              className="markdown-terminal"
+              dangerouslySetInnerHTML={{ __html: marked.parse(msg.markdown) as string }}
+            />
+          ) : (
+            msg.lines?.map((line, i) => (
+              <p key={i} className={`font-[family-name:var(--font-code)] text-sm leading-[1.625] whitespace-pre-wrap break-words ${LINE_COLOR[line.type]}`}>
+                {line.text}
+              </p>
+            ))
+          )}
         </div>
       </div>
     </div>
@@ -223,6 +147,8 @@ function ChatModal({ isOpen, onClose, pendingCommand, onPendingConsumed }: { isO
   const [history, setHistory] = useState<string[]>([]);
   const [historyIdx, setHistoryIdx] = useState(-1);
   const [cursorVisible, setCursorVisible] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiHistory, setApiHistory] = useState<ApiHistoryEntry[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -260,38 +186,68 @@ function ChatModal({ isOpen, onClose, pendingCommand, onPendingConsumed }: { isO
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  function submit(cmd?: string) {
+  async function submit(cmd?: string) {
     const raw = cmd ?? input;
     const trimmed = raw.trim().toLowerCase();
-    if (!trimmed) return;
+    if (!trimmed || isLoading) return;
 
     const ts = timestamp();
 
     if (trimmed === "clear") {
       setMessages([{ ...BOOT, timestamp: ts }]);
+      setApiHistory([]);
       setInput("");
       setHistory((h) => [raw, ...h]);
       setHistoryIdx(-1);
       return;
     }
 
-    const handler = COMMANDS[trimmed];
-    const agentMsg: Message = {
+    const userMsg: Message = { role: "user", command: raw.trim(), timestamp: ts };
+    const thinkingMsg: Message = {
       role: "agent",
-      lines: handler
-        ? handler()
-        : [{ type: "error", text: `Command not found: "${trimmed}". Type "help" for options.` }],
+      lines: [{ type: "system", text: "> PROCESSING..." }],
       timestamp: timestamp(),
     };
 
-    setMessages((prev) => [
-      ...prev,
-      { role: "user", command: raw.trim(), timestamp: ts },
-      agentMsg,
-    ]);
+    setMessages((prev) => [...prev, userMsg, thinkingMsg]);
     setHistory((h) => [raw, ...h]);
     setHistoryIdx(-1);
     setInput("");
+    setIsLoading(true);
+
+    try {
+      const res = await fetch(`${API_URL}/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: raw.trim(), history: apiHistory }),
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const text: string = data.response ?? "";
+
+      setApiHistory((h) => [
+        ...h,
+        { role: "user", content: raw.trim() },
+        { role: "assistant", content: text },
+      ]);
+
+      setMessages((prev) => [
+        ...prev.slice(0, -1),
+        { role: "agent", markdown: text, timestamp: timestamp() },
+      ]);
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev.slice(0, -1),
+        {
+          role: "agent",
+          lines: [{ type: "error", text: `CONNECTION_ERROR: ${err instanceof Error ? err.message : "Unknown"}` }],
+          timestamp: timestamp(),
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
@@ -375,7 +331,8 @@ function ChatModal({ isOpen, onClose, pendingCommand, onPendingConsumed }: { isO
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="bg-transparent font-[family-name:var(--font-display)] font-bold text-white text-lg sm:text-2xl tracking-[-1.2px] uppercase outline-none w-full placeholder:text-white/30"
+                disabled={isLoading}
+                className="bg-transparent font-[family-name:var(--font-display)] font-bold text-white text-lg sm:text-2xl tracking-[-1.2px] uppercase outline-none w-full placeholder:text-white/30 disabled:opacity-50"
                 spellCheck={false}
                 autoComplete="off"
                 autoCapitalize="off"
@@ -392,7 +349,8 @@ function ChatModal({ isOpen, onClose, pendingCommand, onPendingConsumed }: { isO
               </span>
               <button
                 onClick={() => submit()}
-                className="bg-black border-2 border-black px-4 sm:px-8 py-2 sm:py-3 font-[family-name:var(--font-display)] font-bold text-white text-sm sm:text-base tracking-[1.6px] uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,0.4)] hover:bg-[#1a1a1a] transition-colors"
+                disabled={isLoading}
+                className="bg-black border-2 border-black px-4 sm:px-8 py-2 sm:py-3 font-[family-name:var(--font-display)] font-bold text-white text-sm sm:text-base tracking-[1.6px] uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,0.4)] hover:bg-[#1a1a1a] transition-colors disabled:opacity-50"
               >
                 SEND
               </button>

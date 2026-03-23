@@ -15,10 +15,10 @@ export default function DinoRunner() {
     if (!ctx) return;
 
     const H = 150;
-    const GROUND = 125;  // ground line y — leaves ~125px for jump arc
+    const GROUND = 125; 
     const DINO_X = 72;
     const GRAVITY = 0.65;
-    const JUMP_V = -10;   // peak ≈ 77px, dino top at ~4px — stays in canvas
+    const JUMP_V = -10;   
     const MISS_CHANCE = 0.18;
     const SPEED = 24.0;
 
