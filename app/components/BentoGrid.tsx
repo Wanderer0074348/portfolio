@@ -12,7 +12,7 @@ const imgGlobeIcon               = "https://www.figma.com/api/mcp/asset/2168fbe8
 
 const item = (delay: number) => ({
   hidden:  { y: 32, opacity: 0 },
-  visible: { y: 0,  opacity: 1, transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] } },
+  visible: { y: 0,  opacity: 1, transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const } },
 });
 
 const viewport = { once: true, amount: 0.15 };
