@@ -82,6 +82,17 @@ const BOOT: Omit<Message, "timestamp"> = {
 };
 
 
+// ─── Blinking cursor (isolated to prevent re-rendering messages) ──────────────
+
+function BlinkingCursor() {
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    const id = setInterval(() => setVisible((v) => !v), 530);
+    return () => clearInterval(id);
+  }, []);
+  return <div className="bg-white w-[10px] h-5 shrink-0 ml-1" style={{ opacity: visible ? 1 : 0 }} />;
+}
+
 // ─── Message sub-components ───────────────────────────────────────────────────
 
 function AgentMessage({ msg }: { msg: Message }) {
@@ -146,7 +157,6 @@ function ChatModal({ isOpen, onClose, pendingCommand, onPendingConsumed }: { isO
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<string[]>([]);
   const [historyIdx, setHistoryIdx] = useState(-1);
-  const [cursorVisible, setCursorVisible] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [apiHistory, setApiHistory] = useState<ApiHistoryEntry[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -171,11 +181,6 @@ function ChatModal({ isOpen, onClose, pendingCommand, onPendingConsumed }: { isO
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
-  useEffect(() => {
-    const id = setInterval(() => setCursorVisible((v) => !v), 530);
-    return () => clearInterval(id);
-  }, []);
 
   // close on Escape
   useEffect(() => {
@@ -338,10 +343,7 @@ function ChatModal({ isOpen, onClose, pendingCommand, onPendingConsumed }: { isO
                 autoCapitalize="off"
                 placeholder="ENTER COMMAND"
               />
-              <div
-                className="bg-white w-[10px] h-5 shrink-0 ml-1"
-                style={{ opacity: cursorVisible ? 1 : 0 }}
-              />
+              <BlinkingCursor />
             </div>
             <div className="flex items-center gap-4 sm:gap-6 shrink-0">
               <span className="font-[family-name:var(--font-code)] text-white/50 text-[9px] tracking-[2.7px] uppercase hidden lg:block">

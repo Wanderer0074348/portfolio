@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { siteConfig } from "@/lib/config";
+import { useChatModal } from "../components/ChatProvider";
 
-const imgSearchIcon    = "https://www.figma.com/api/mcp/asset/61e6bf8b-b632-44a9-a92c-1a12083ea481";
-const imgArrow         = "https://www.figma.com/api/mcp/asset/1b067e79-3482-4d59-a1bd-3f62b4a64827";
+const imgArrow           = "https://www.figma.com/api/mcp/asset/1b067e79-3482-4d59-a1bd-3f62b4a64827";
 const imgManuscriptArrow = "https://www.figma.com/api/mcp/asset/d05f5596-4895-498d-86d8-eb22d291eb12";
 const imgTerminalCorner  = "https://www.figma.com/api/mcp/asset/2428782a-e6f4-46ca-af9a-ae0a86db5a18";
 
-// Project images (placeholder grid pattern per card)
 const PROJECT_IMGS = [
   "https://www.figma.com/api/mcp/asset/9d4352fd-0adf-4bf0-bfbb-80dc5bd775f6",
   "https://www.figma.com/api/mcp/asset/c7a1aa6a-140d-41f5-bad8-d7a4cb4f4092",
@@ -19,46 +19,20 @@ const PROJECT_IMGS = [
   "https://www.figma.com/api/mcp/asset/c2435178-dcf5-4011-b69e-52047c558bdf",
 ];
 
-interface MissionCard {
-  id: string;
-  sector: string;
-  ref: string;
-  title: string;
-  desc: string;
-  meta: string;
-  dotColor: string;
-  img: string;
-  stack: readonly string[];
-  tag: "full" | "progress" | "archived";
-}
-
-// Map config projects to MissionCard format
-const missions: MissionCard[] = siteConfig.projects.map((p, i) => ({
-  id: p.id,
-  sector: p.sector,
-  ref: p.ref,
-  title: p.title,
-  desc: p.desc,
-  meta: p.meta,
-  dotColor: p.dotColor,
-  img: PROJECT_IMGS[i] ?? PROJECT_IMGS[0],
-  stack: p.stack,
-  tag: p.tag,
-}));
-
-const FILTERS = ["Full_Portfolio", "In_Progress", "Archived"] as const;
+const FILTERS = ["Full_Portfolio", "Projects", "Experience", "Club_Work"] as const;
 type Filter = typeof FILTERS[number];
+
+const lug = siteConfig.leadership[2]; // Ex-Officio, Linux Users Group
+
+const COMPANY_IMAGES: Record<string, string> = {
+  esri:  "/Esri.png",
+  ymt:   "/YMT.png",
+  kptac: "/KPTAC.png",
+};
 
 export default function MissionsPage() {
   const [activeFilter, setActiveFilter] = useState<Filter>("Full_Portfolio");
-  const [search, setSearch] = useState("");
-
-  const filtered = missions.filter((m) => {
-    if (activeFilter === "In_Progress" && m.tag !== "progress") return false;
-    if (activeFilter === "Archived" && m.tag !== "archived") return false;
-    if (search && !m.title.toLowerCase().includes(search.toLowerCase())) return false;
-    return true;
-  });
+  const [selectedExp, setSelectedExp] = useState<typeof siteConfig.experience[number] | null>(null);
 
   return (
     <div className="bg-[#f9f9f9] flex flex-col min-h-screen">
@@ -103,138 +77,320 @@ export default function MissionsPage() {
               {f.replace("_", " ")}
             </button>
           ))}
-          <div className="flex-1" />
-          <div className="relative w-64">
-            <div className="absolute left-3 top-1/2 -translate-y-1/2">
-              <img alt="" className="size-[18px]" src={imgSearchIcon} />
-            </div>
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="FILTER_THREADS..."
-              className="w-full bg-white border-[4px] border-black pl-[52px] pr-4 py-4 font-[family-name:var(--font-data)] text-sm text-[#6b7280] placeholder:text-[#6b7280] outline-none"
-            />
-          </div>
         </div>
 
-        {/* ── Bento Grid ── */}
-        <div className="grid grid-cols-3 gap-10">
+        {/* ── Full Portfolio ── */}
+        {activeFilter === "Full_Portfolio" && (
+          <div className="grid grid-cols-3 gap-10">
 
-          {/* Row 1 — Cards 1, 2, 3 */}
-          {filtered.slice(0, 3).map((m) => (
-            <MissionCardComponent key={m.id} card={m} />
-          ))}
+            {/* Row 1 — first 3 projects */}
+            {siteConfig.projects.slice(0, 3).map((p, i) => (
+              <Link key={p.id} href={`/missions/${p.id}`} className="block group">
+                <div className="bg-white border-[4px] border-black flex flex-col shadow-[8px_8px_0px_0px_black] p-1 isolate group-hover:shadow-[12px_12px_0px_0px_black] transition-shadow">
+                  <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
+                    <div className="h-[207px] relative">
+                      <img alt="" className="absolute inset-0 w-full h-[181%] max-w-none object-cover grayscale top-[-40%]" src={PROJECT_IMGS[i]} />
+                    </div>
+                    <div className="absolute top-4 left-4 bg-black px-2 py-1">
+                      <span className="font-[family-name:var(--font-data)] font-bold text-[#034694] text-xs uppercase">{p.sector}</span>
+                    </div>
+                  </div>
+                  <div className="p-6 flex flex-col gap-4 flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-[family-name:var(--font-data)] font-bold text-[#5e5e5e] text-xs tracking-[-0.6px] uppercase">{p.ref}</span>
+                      <div className={`${p.dotColor} size-3 shrink-0`} />
+                    </div>
+                    <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-[30px] tracking-[-1.5px] uppercase leading-[30px]">{p.title}</h3>
+                    <div className="flex flex-wrap gap-1">
+                      {p.stack.slice(0, 3).map((t) => (
+                        <span key={t} className="font-[family-name:var(--font-data)] text-[#5e5e5e] text-[10px] border border-[#d4d4d4] px-1.5 py-0.5 uppercase">{t}</span>
+                      ))}
+                    </div>
+                    <div className="border-t-[4px] border-black pt-7 flex items-center justify-between mt-auto">
+                      <span className="font-[family-name:var(--font-data)] font-bold text-[#1a1c1c] text-xs tracking-[1.2px] uppercase">{p.meta}</span>
+                      <img alt="" className="size-4" src={imgArrow} />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
 
-          {/* Row 2 — Card 4 + Special Card */}
-          {filtered.find((m) => m.id === "4") && (
-            <MissionCardComponent card={filtered.find((m) => m.id === "4")!} />
-          )}
-
-          {/* Special Terminal Card — spans 2 cols */}
-          <div className="col-span-2 bg-black border-[4px] border-black shadow-[8px_8px_0px_0px_black] flex gap-10 items-center p-11">
-            <div className="flex-1 flex flex-col gap-6">
-              <div className="bg-[#034694] px-3 py-1 w-fit">
-                <span className="font-[family-name:var(--font-data)] text-white text-[10px] tracking-[2px] uppercase">
-                  Current_Role
-                </span>
+            {/* Row 2 — terminal card + project[3] */}
+            <div className="col-span-2 bg-black border-[4px] border-black shadow-[8px_8px_0px_0px_black] flex gap-10 items-center p-11">
+              <div className="flex-1 flex flex-col gap-6">
+                <div className="bg-[#034694] px-3 py-1 w-fit">
+                  <span className="font-[family-name:var(--font-data)] text-white text-[10px] tracking-[2px] uppercase">Current_Role</span>
+                </div>
+                <h2 className="font-[family-name:var(--font-display)] font-bold text-[48px] tracking-[-2.4px] uppercase leading-[48px]">
+                  <span className="text-white">{siteConfig.experience[0].org}</span><br />
+                  <span className="text-[#034694]">{siteConfig.experience[0].title}</span>
+                </h2>
+                <a href={siteConfig.contact.linkedinUrl} target="_blank" rel="noopener noreferrer"
+                  className="bg-white border-b-[8px] border-r-[8px] border-[#034694] flex gap-4 items-center pl-10 pr-12 pt-4 pb-6 w-fit">
+                  <span className="font-sans font-bold text-black text-base uppercase">View_Profile</span>
+                  <img alt="" className="h-5 w-4" src={imgManuscriptArrow} />
+                </a>
               </div>
-              <h2 className="font-[family-name:var(--font-display)] font-bold text-[48px] tracking-[-2.4px] uppercase leading-[48px]">
-                <span className="text-white">{siteConfig.experience[0].org}</span><br />
-                <span className="text-[#034694]">{siteConfig.experience[0].title}</span>
-              </h2>
-              <p className="font-[family-name:var(--font-data)] text-[#a3a3a3] text-sm leading-5">
-                {siteConfig.experience[0].bullets[0]}
-              </p>
-              <a
-                href={siteConfig.contact.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white border-b-[8px] border-r-[8px] border-[#034694] flex gap-4 items-center pl-10 pr-12 pt-4 pb-6 w-fit"
-              >
-                <span className="font-sans font-bold text-black text-base uppercase">View_Profile</span>
-                <img alt="" className="h-5 w-4" src={imgManuscriptArrow} />
-              </a>
+              <div className="bg-[#171717] border-[4px] border-[#034694] w-[233px] h-full min-h-[280px] relative overflow-hidden shrink-0 flex flex-col">
+                <div className="bg-white">
+                  <img alt="ESRI" className="w-full object-cover" src="/Esri.png" />
+                </div>
+                <div className="p-5 flex flex-col gap-3">
+                  {[
+                    { text: ">> ROLE_VITALS",                                    color: "text-white"     },
+                    { text: `ORG: ESRI_GLOBAL`,                                  color: "text-[#034694]" },
+                    { text: `ROLE: AI_INTERN`,                                   color: "text-[#034694]" },
+                    { text: `LOCATION: SHARJAH_UAE`,                             color: "text-[#034694]" },
+                    { text: `SINCE: FEB.2026`,                                   color: "text-[#034694]" },
+                    { text: `STATUS: ACTIVE`,                                    color: "text-[#034694]" },
+                    { text: "> _",                                                color: "text-[#034694]" },
+                  ].map(({ text, color }, i) => (
+                    <p key={i} className={`font-[family-name:var(--font-data)] text-xs leading-4 ${color}`}>{text}</p>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            {/* Mini terminal */}
-            <div className="bg-[#171717] border-[4px] border-[#034694] w-[233px] h-full min-h-[280px] relative overflow-hidden shrink-0">
-              <img alt="" className="absolute top-0 right-0 h-9 w-8" src={imgTerminalCorner} />
-              <div className="p-6 flex flex-col gap-5 mt-2">
-                {[
-                  { text: ">> RUN DIAGNOSTIC",                          color: "text-white"      },
-                  { text: `CGPA: ${siteConfig.education.cgpa}`,         color: "text-[#034694]"  },
-                  { text: `PROJECTS: ${siteConfig.projects.length}`,    color: "text-[#034694]"  },
-                  { text: `HACKATHON: WINNER`,                          color: "text-[#034694]"  },
-                  { text: `STATUS: ${siteConfig.status}`,               color: "text-[#034694]"  },
-                  { text: "SYSTEMS: NOMINAL",                           color: "text-[#034694]"  },
-                  { text: "> _",                                         color: "text-[#034694]"  },
-                ].map(({ text, color }, i) => (
-                  <p key={i} className={`font-[family-name:var(--font-data)] text-xs leading-4 ${color}`}>
-                    {text}
-                  </p>
-                ))}
+            <Link href={`/missions/${siteConfig.projects[3].id}`} className="block group">
+              <div className="bg-white border-[4px] border-black flex flex-col shadow-[8px_8px_0px_0px_black] p-1 isolate group-hover:shadow-[12px_12px_0px_0px_black] transition-shadow h-full">
+                <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
+                  <div className="h-[207px] relative">
+                    <img alt="" className="absolute inset-0 w-full h-[181%] max-w-none object-cover grayscale top-[-40%]" src={PROJECT_IMGS[3]} />
+                  </div>
+                  <div className="absolute top-4 left-4 bg-black px-2 py-1">
+                    <span className="font-[family-name:var(--font-data)] font-bold text-[#034694] text-xs uppercase">{siteConfig.projects[3].sector}</span>
+                  </div>
+                </div>
+                <div className="p-6 flex flex-col gap-4 flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-[family-name:var(--font-data)] font-bold text-[#5e5e5e] text-xs tracking-[-0.6px] uppercase">{siteConfig.projects[3].ref}</span>
+                    <div className={`${siteConfig.projects[3].dotColor} size-3 shrink-0`} />
+                  </div>
+                  <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-[30px] tracking-[-1.5px] uppercase leading-[30px]">{siteConfig.projects[3].title}</h3>
+                  <div className="flex flex-wrap gap-1">
+                    {siteConfig.projects[3].stack.slice(0, 3).map((t) => (
+                      <span key={t} className="font-[family-name:var(--font-data)] text-[#5e5e5e] text-[10px] border border-[#d4d4d4] px-1.5 py-0.5 uppercase">{t}</span>
+                    ))}
+                  </div>
+                  <div className="border-t-[4px] border-black pt-7 flex items-center justify-between mt-auto">
+                    <span className="font-[family-name:var(--font-data)] font-bold text-[#1a1c1c] text-xs tracking-[1.2px] uppercase">{siteConfig.projects[3].meta}</span>
+                    <img alt="" className="size-4" src={imgArrow} />
+                  </div>
+                </div>
               </div>
+            </Link>
+
+            {/* Row 3 — LUG Ex-Officio (full width) */}
+            <div className="col-span-3 bg-black border-[4px] border-black shadow-[8px_8px_0px_0px_black] p-11 flex items-center gap-16">
+              <div className="bg-[#034694] px-3 py-1 w-fit shrink-0">
+                <span className="font-[family-name:var(--font-data)] text-white text-[10px] tracking-[2px] uppercase">Club_Work</span>
+              </div>
+              <div className="flex-1">
+                <h3 className="font-[family-name:var(--font-display)] font-bold text-white text-[36px] tracking-[-1.8px] uppercase leading-tight">
+                  {lug.title} — {lug.org}
+                </h3>
+              </div>
+            </div>
+
+          </div>
+        )}
+
+        {/* ── Projects ── */}
+        {activeFilter === "Projects" && (
+          <div className="grid grid-cols-3 gap-10">
+            {siteConfig.projects.map((p, i) => (
+              <Link key={p.id} href={`/missions/${p.id}`} className="block group">
+                <div className="bg-white border-[4px] border-black flex flex-col shadow-[8px_8px_0px_0px_black] p-1 isolate group-hover:shadow-[12px_12px_0px_0px_black] transition-shadow">
+                  <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
+                    <div className="h-[207px] relative">
+                      <img
+                        alt=""
+                        className="absolute inset-0 w-full h-[181%] max-w-none object-cover grayscale top-[-40%]"
+                        src={PROJECT_IMGS[i] ?? PROJECT_IMGS[0]}
+                      />
+                    </div>
+                    <div className="absolute top-4 left-4 bg-black px-2 py-1">
+                      <span className="font-[family-name:var(--font-data)] font-bold text-[#034694] text-xs uppercase">
+                        {p.sector}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6 flex flex-col gap-4 flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-[family-name:var(--font-data)] font-bold text-[#5e5e5e] text-xs tracking-[-0.6px] uppercase">
+                        {p.ref}
+                      </span>
+                      <div className={`${p.dotColor} size-3 shrink-0`} />
+                    </div>
+                    <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-[30px] tracking-[-1.5px] uppercase leading-[30px]">
+                      {p.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-1">
+                      {p.stack.slice(0, 3).map((t) => (
+                        <span key={t} className="font-[family-name:var(--font-data)] text-[#5e5e5e] text-[10px] border border-[#d4d4d4] px-1.5 py-0.5 uppercase">{t}</span>
+                      ))}
+                    </div>
+                    <div className="border-t-[4px] border-black pt-7 flex items-center justify-between mt-auto">
+                      <span className="font-[family-name:var(--font-data)] font-bold text-[#1a1c1c] text-xs tracking-[1.2px] uppercase">
+                        {p.meta}
+                      </span>
+                      <img alt="" className="size-4" src={imgArrow} />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* ── Experience ── */}
+        {activeFilter === "Experience" && (
+          <div className="grid grid-cols-3 gap-10">
+            {/* Featured current role */}
+            <button onClick={() => setSelectedExp(siteConfig.experience[0])} className="col-span-2 text-left bg-black border-[4px] border-black shadow-[8px_8px_0px_0px_black] flex gap-10 items-center p-11 hover:shadow-[12px_12px_0px_0px_black] transition-shadow">
+              <div className="flex-1 flex flex-col gap-6">
+                <div className="bg-[#034694] px-3 py-1 w-fit">
+                  <span className="font-[family-name:var(--font-data)] text-white text-[10px] tracking-[2px] uppercase">
+                    Current_Role
+                  </span>
+                </div>
+                <h2 className="font-[family-name:var(--font-display)] font-bold text-[48px] tracking-[-2.4px] uppercase leading-[48px]">
+                  <span className="text-white">{siteConfig.experience[0].org}</span><br />
+                  <span className="text-[#034694]">{siteConfig.experience[0].title}</span>
+                </h2>
+              </div>
+              <div className="bg-[#171717] border-[4px] border-[#034694] w-[233px] h-full min-h-[280px] relative overflow-hidden shrink-0 flex flex-col">
+                <div className="bg-white">
+                  <img alt="ESRI" className="w-full object-cover" src="/Esri.png" />
+                </div>
+                <div className="p-5 flex flex-col gap-3">
+                  {[
+                    { text: ">> ROLE_VITALS",          color: "text-white"     },
+                    { text: `ORG: ESRI_GLOBAL`,        color: "text-[#034694]" },
+                    { text: `ROLE: AI_INTERN`,         color: "text-[#034694]" },
+                    { text: `LOCATION: SHARJAH_UAE`,   color: "text-[#034694]" },
+                    { text: `SINCE: FEB.2026`,         color: "text-[#034694]" },
+                    { text: `STATUS: ACTIVE`,          color: "text-[#034694]" },
+                    { text: "> _",                     color: "text-[#034694]" },
+                  ].map(({ text, color }, i) => (
+                    <p key={i} className={`font-[family-name:var(--font-data)] text-xs leading-4 ${color}`}>
+                      {text}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </button>
+
+            {/* Past internships */}
+            <div className="flex flex-col gap-6">
+              {siteConfig.experience.slice(1).map((exp) => (
+                <button key={exp.id} onClick={() => setSelectedExp(exp)} className="text-left bg-white border-[4px] border-black shadow-[8px_8px_0px_0px_black] p-6 flex flex-col gap-3 hover:shadow-[12px_12px_0px_0px_black] transition-shadow">
+                  <div className="flex items-start justify-between gap-2">
+                    <span className="font-[family-name:var(--font-data)] font-bold text-[#034694] text-[10px] tracking-[2px] uppercase">{exp.org}</span>
+                    <span className="font-[family-name:var(--font-data)] text-[#a3a3a3] text-[10px] uppercase shrink-0">{exp.period}</span>
+                  </div>
+                  <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-lg uppercase tracking-tight leading-tight">
+                    {exp.title}
+                  </h3>
+                  <p className="font-[family-name:var(--font-data)] text-[#737373] text-xs uppercase">{exp.location}</p>
+                </button>
+              ))}
             </div>
           </div>
+        )}
 
-          {/* Row 3 — Card 5 */}
-          {filtered.find((m) => m.id === "5") && (
-            <MissionCardComponent card={filtered.find((m) => m.id === "5")!} />
-          )}
+        {/* ── Club Work ── */}
+        {activeFilter === "Club_Work" && (
+          <div className="grid grid-cols-3 gap-10">
+            {siteConfig.leadership.map((l) => (
+              <div key={l.title} className="bg-white border-[4px] border-black shadow-[8px_8px_0px_0px_black] p-8 flex flex-col gap-4">
+                <div className="bg-black px-2 py-1 w-fit">
+                  <span className="font-[family-name:var(--font-data)] font-bold text-[#034694] text-[10px] tracking-[2px] uppercase">
+                    {l.org}
+                  </span>
+                </div>
+                <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-2xl uppercase tracking-tight leading-tight">
+                  {l.title}
+                </h3>
+                <p className="font-sans text-[#5e5e5e] text-sm leading-5">{l.desc}</p>
+              </div>
+            ))}
+          </div>
+        )}
 
-        </div>
       </main>
+
+      {selectedExp && (
+        <ExperiencePopup exp={selectedExp} onClose={() => setSelectedExp(null)} />
+      )}
 
       <Footer />
     </div>
   );
 }
 
-function MissionCardComponent({ card }: { card: MissionCard }) {
+function ExperiencePopup({
+  exp,
+  onClose,
+}: {
+  exp: typeof siteConfig.experience[number];
+  onClose: () => void;
+}) {
+  const { openWithCommand } = useChatModal();
+
+  function handleTanyaBot() {
+    onClose();
+    openWithCommand(`Tell me about Tanay's experience at ${exp.org}`);
+  }
+
   return (
-    <div className="bg-white border-[4px] border-black flex flex-col shadow-[8px_8px_0px_0px_black] p-1 isolate">
-      {/* Image */}
-      <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
-        <div className="h-[207px] relative">
-          <img
-            alt=""
-            className="absolute inset-0 w-full h-[181%] max-w-none object-cover grayscale top-[-40%]"
-            src={card.img}
-          />
-        </div>
-        <div className="absolute top-4 left-4 bg-black px-2 py-1">
-          <span className="font-[family-name:var(--font-data)] font-bold text-[#034694] text-xs uppercase">
-            {card.sector}
-          </span>
-        </div>
-      </div>
+    <div
+      className="fixed inset-0 z-[90] bg-[rgba(0,0,0,0.6)] backdrop-blur-[2px] flex items-center justify-center p-6"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
+      <div className="bg-white border-[6px] border-black shadow-[12px_12px_0px_0px_black] w-full max-w-[560px] flex flex-col">
 
-      {/* Content */}
-      <div className="p-6 flex flex-col gap-4 flex-1">
-        <div className="flex items-center justify-between">
-          <span className="font-[family-name:var(--font-data)] font-bold text-[#5e5e5e] text-xs tracking-[-0.6px] uppercase">
-            {card.ref}
-          </span>
-          <div className={`${card.dotColor} size-3 shrink-0`} />
-        </div>
-        <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-[30px] tracking-[-1.5px] uppercase leading-[30px]">
-          {card.title}
-        </h3>
-        <p className="font-sans text-[#434751] text-sm leading-5">{card.desc}</p>
-        <div className="flex flex-wrap gap-1">
-          {card.stack.slice(0, 3).map((t) => (
-            <span key={t} className="font-[family-name:var(--font-data)] text-[#5e5e5e] text-[10px] border border-[#d4d4d4] px-1.5 py-0.5 uppercase">{t}</span>
-          ))}
+        {/* Header */}
+        <div className="bg-black px-8 py-5 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="bg-[#034694] px-2 py-0.5">
+              <span className="font-[family-name:var(--font-data)] text-white text-[10px] tracking-[2px] uppercase">{exp.org}</span>
+            </div>
+            <span className="font-[family-name:var(--font-data)] text-[#737373] text-[10px] uppercase">{exp.period}</span>
+          </div>
+          <button onClick={onClose} className="font-[family-name:var(--font-data)] text-[#737373] text-xs hover:text-white transition-colors">✕</button>
         </div>
 
-        {/* Footer */}
-        <div className="border-t-[4px] border-black pt-7 flex items-center justify-between mt-auto">
-          <span className="font-[family-name:var(--font-data)] font-bold text-[#1a1c1c] text-xs tracking-[1.2px] uppercase">
-            {card.meta}
-          </span>
-          <img alt="" className="size-4" src={imgArrow} />
+        {/* Body */}
+        <div className="p-8 flex flex-col gap-6">
+          {COMPANY_IMAGES[exp.id] && (
+            <div className="bg-black border-[3px] border-black overflow-hidden w-1/2 mx-auto">
+              <img alt={exp.org} className="w-full object-cover" src={COMPANY_IMAGES[exp.id]} />
+            </div>
+          )}
+          <div>
+            <h3 className="font-[family-name:var(--font-display)] font-bold text-black text-[28px] tracking-[-1.4px] uppercase leading-tight">
+              {exp.title}
+            </h3>
+            <p className="font-[family-name:var(--font-data)] text-[#737373] text-xs uppercase mt-1">{exp.location}</p>
+          </div>
+
+          <ul className="flex flex-col gap-3">
+            {exp.bullets.map((b, i) => (
+              <li key={i} className="font-sans text-[#434751] text-sm leading-5 pl-4 border-l-[3px] border-[#034694]">
+                {b}
+              </li>
+            ))}
+          </ul>
+
+          <button
+            onClick={handleTanyaBot}
+            className="bg-black text-white border-[4px] border-black px-8 py-4 font-[family-name:var(--font-display)] font-bold text-base uppercase tracking-[1.6px] shadow-[6px_6px_0px_0px_#034694] hover:bg-[#1a1a1a] transition-colors w-full mt-2"
+          >
+            Talk to Tanya_Bot →
+          </button>
         </div>
+
       </div>
     </div>
   );

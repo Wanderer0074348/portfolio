@@ -102,6 +102,8 @@ export const siteConfig = {
       meta: "Status: Active",
       dotColor: "bg-[#034694]",
       tag: "progress" as const,
+      video: "https://pub-b89bbe6de05c4dc4bc02906fe3d45c25.r2.dev/HybridLM.mp4",
+      report: "/reports/HybridLM.pdf", // "/reports/filename.pdf" for public/reports/ files
     },
     {
       id: "crackit",
@@ -113,6 +115,8 @@ export const siteConfig = {
       meta: "Status: Stable",
       dotColor: "bg-[#034694]",
       tag: "full" as const,
+      video: "",
+      report: "", // "/reports/filename.pdf" for public/reports/ files
     },
     {
       id: "kangl",
@@ -124,6 +128,8 @@ export const siteConfig = {
       meta: "Status: Deployed",
       dotColor: "bg-[#034694]",
       tag: "full" as const,
+      video: "https://pub-b89bbe6de05c4dc4bc02906fe3d45c25.r2.dev/KanglAd.mp4",
+      report: "", // "/reports/filename.pdf" for public/reports/ files
     },
     {
       id: "plgrzr",
@@ -135,6 +141,8 @@ export const siteConfig = {
       meta: "Accuracy: 95%+",
       dotColor: "bg-[#22c55e]",
       tag: "archived" as const,
+      video: "",
+      report: "", // "/reports/filename.pdf" for public/reports/ files
     },
     {
       id: "arsidet",
@@ -146,6 +154,8 @@ export const siteConfig = {
       meta: "Accuracy: 97%",
       dotColor: "bg-[#22c55e]",
       tag: "archived" as const,
+      video: "",
+      report: "", // "/reports/filename.pdf" for public/reports/ files
     },
   ],
 

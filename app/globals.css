@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+@keyframes cell-ripple {
+  0%   { opacity: 0.4; }
+  40%  { opacity: 0.9; background-color: var(--color-neutral-300); }
+  100% { opacity: 0.4; }
+}
+
+@utility animate-cell-ripple {
+  animation-name: cell-ripple;
+  animation-duration: var(--duration, 400ms);
+  animation-delay: var(--delay, 0ms);
+  animation-timing-function: ease-in-out;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -27,6 +40,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+*, *::before, *::after {
+  cursor: none !important;
+}
+
+#custom-cursor[data-pointer="1"] #cursor-arrow   { display: none;  }
+#custom-cursor[data-pointer="1"] #cursor-pointer { display: block; }
+#custom-cursor[data-pointer="0"] #cursor-arrow   { display: block; }
+#custom-cursor[data-pointer="0"] #cursor-pointer { display: none;  }
 
 /* ── Terminal markdown renderer ─────────────────────────────────────────────── */
 .markdown-terminal {

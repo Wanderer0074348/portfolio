@@ -5,20 +5,13 @@ import TerminalTrigger from "./components/TerminalTrigger";
 import TerminalLauncher from "./components/TerminalLauncher";
 import SlideUpSection from "./components/SlideUpSection";
 import HeroContent from "./components/HeroContent";
-import DinoRunner from "./components/DinoRunner";
+import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
 import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
+import BentoGrid from "./components/BentoGrid";
 import { siteConfig } from "@/lib/config";
 
-const HERO_IMG =
-  "/hero.png";
-
-const imgDigitalGridArchitecture = "https://www.figma.com/api/mcp/asset/94856324-3b83-4e31-a78d-f57d923d6f3a";
 const imgViewAllArrow = "https://www.figma.com/api/mcp/asset/bd32461d-b298-4312-9757-f69db85fc549";
-const imgAccessFilesArrow = "https://www.figma.com/api/mcp/asset/2fa42a80-405b-4c50-931d-a9fbd93ae798";
-const imgDataStreamIcon = "https://www.figma.com/api/mcp/asset/aa473288-c52f-48bb-9302-279f0ed5dc3b";
-const imgInspectArrow = "https://www.figma.com/api/mcp/asset/56825ccb-3aed-459d-a939-24931c869a9b";
-const imgGlobeIcon = "https://www.figma.com/api/mcp/asset/2168fbe8-a6ad-464e-bfb9-25da9249403a";
-const imgQRIcon = "https://www.figma.com/api/mcp/asset/b0d6b8a2-f78d-482f-b291-5b0d102a3445";
+
 
 
 export default function Home() {
@@ -35,22 +28,16 @@ export default function Home() {
         </div>
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
           <PixelatedCanvas
-            src={HERO_IMG}
-            width={1920}
-            height={900}
+            src="/hero.png"
+            width={960}
+            height={540}
             cellSize={4}
             dotScale={0.9}
             shape="square"
             backgroundColor="#000000"
             dropoutStrength={0.1}
-            interactive
-            distortionStrength={0.1}
-            distortionRadius={200}
-            distortionMode="repel"
-            followSpeed={0.2}
-            jitterStrength={4}
-            jitterSpeed={1}
             sampleAverage
+            interactive={false}
             fill
           />
         </div>
@@ -73,12 +60,13 @@ export default function Home() {
           </div>
 
         </HeroContent>
-        <DinoRunner />
+
       </section>
 
       {/* ── Featured Projects / Bento Grid ── */}
       <SlideUpSection className="bg-[#f9f9f9] px-6 py-24 relative z-20">
-        <div className="max-w-[1440px] mx-auto flex flex-col gap-16">
+        <BackgroundRippleEffect />
+        <div className="relative z-10 max-w-[1440px] mx-auto flex flex-col gap-16">
 
           {/* Section header */}
           <div className="flex items-end justify-between">
@@ -99,114 +87,7 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Bento Grid — top 4 projects from config */}
-          <div
-            className="grid grid-cols-12 gap-8"
-            style={{ gridTemplateRows: "411.33px 275px" }}
-          >
-            {/* Large Feature — project[0]: HybridLM Engine */}
-            <div className="col-span-8 relative bg-black border-[6px] border-black overflow-hidden p-[6px] shadow-[8px_8px_0px_0px_black] isolate">
-              <div className="absolute inset-0 z-[1]">
-                <img alt="" className="w-full h-full object-cover" src={imgDigitalGridArchitecture} />
-                <div className="absolute inset-0 bg-white mix-blend-saturation" />
-              </div>
-              <div className="absolute inset-0 bg-[rgba(3,70,148,0.3)] mix-blend-multiply z-[2]" />
-              <div className="absolute inset-[6px] bg-black z-[3] p-10 flex flex-col justify-between">
-                <div className="flex flex-col gap-4 pb-8">
-                  <span className="font-mono font-bold text-[#034694] text-sm tracking-[2.8px] uppercase">
-                    {siteConfig.projects[0].sector}
-                  </span>
-                  <h3 className="font-[family-name:var(--font-display)] font-bold text-white text-[36px] tracking-[-1.8px] uppercase leading-10">
-                    {siteConfig.projects[0].title}
-                  </h3>
-                  <p className="font-sans font-light text-[#a3a3a3] text-base leading-6">
-                    {siteConfig.projects[0].desc}
-                  </p>
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {siteConfig.projects[0].stack.slice(0, 4).map((t) => (
-                      <span key={t} className="font-mono text-[#737373] text-xs border border-[#404040] px-2 py-0.5 uppercase">{t}</span>
-                    ))}
-                  </div>
-                </div>
-                <a href="/missions" className="border-[4px] border-white flex gap-3 items-center px-7 py-4 w-fit">
-                  <span className="font-[family-name:var(--font-display)] font-bold text-white text-base tracking-[1.6px] uppercase">
-                    Access Files
-                  </span>
-                  <img alt="" className="size-4" src={imgAccessFilesArrow} />
-                </a>
-              </div>
-            </div>
-
-            {/* Small Block 1 — project[1]: CrackIt */}
-            <div className="col-span-4 bg-[#e8e8e8] border-[6px] border-black p-[38px] shadow-[8px_8px_0px_0px_black] flex flex-col justify-between">
-              <div className="flex flex-col gap-3">
-                <div className="bg-black size-12 flex items-center justify-center shrink-0">
-                  <img alt="" className="size-[18px]" src={imgDataStreamIcon} />
-                </div>
-                <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-2xl tracking-[-0.6px] uppercase mt-2">
-                  {siteConfig.projects[1].title}
-                </h3>
-                <p className="font-sans font-normal text-[#5e5e5e] text-sm leading-5">
-                  {siteConfig.projects[1].desc.slice(0, 80)}…
-                </p>
-              </div>
-              <div className="pt-4">
-                <a href="/missions" className="flex gap-2 items-center">
-                  <span className="font-mono font-bold text-[#034694] text-xs tracking-[1.2px] uppercase">
-                    Inspect_Code
-                  </span>
-                  <img alt="" className="size-[10.5px]" src={imgInspectArrow} />
-                </a>
-              </div>
-            </div>
-
-            {/* Small Block 2 — project[2]: KanGL */}
-            <div className="col-span-4 bg-[#034694] border-[6px] border-black p-[38px] shadow-[8px_8px_0px_0px_black] flex flex-col justify-between">
-              <div className="flex flex-col gap-3">
-                <div className="bg-black px-2 py-1 w-fit">
-                  <span className="font-sans font-bold text-white text-[10px] tracking-[3px] uppercase">
-                    {siteConfig.projects[2].sector}
-                  </span>
-                </div>
-                <h3 className="font-[family-name:var(--font-display)] font-bold text-white text-2xl tracking-[-0.6px] uppercase">
-                  {siteConfig.projects[2].title}
-                </h3>
-                <p className="font-sans font-normal text-[rgba(255,255,255,0.8)] text-sm leading-5">
-                  {siteConfig.projects[2].desc.slice(0, 80)}…
-                </p>
-              </div>
-              <div className="pt-4 flex items-center justify-between">
-                <img alt="" className="h-[34.5px] w-9" src={imgGlobeIcon} />
-                <span className="font-mono font-bold text-white text-xs">ACT_LINK: ON</span>
-              </div>
-            </div>
-
-            {/* Medium Block — project[3]: Plgrzr */}
-            <div className="col-span-8 bg-[#f9f9f9] border-[6px] border-black overflow-hidden shadow-[8px_8px_0px_0px_black] flex">
-              <div className="flex-1 p-8 flex flex-col gap-4">
-                <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-[30px] tracking-[-1.5px] uppercase leading-9">
-                  {siteConfig.projects[3].title}
-                </h3>
-                <p className="font-sans font-normal text-[#5e5e5e] text-sm leading-5">
-                  {siteConfig.projects[3].desc}
-                </p>
-                <div className="flex gap-2 items-start pt-2 flex-wrap">
-                  {siteConfig.projects[3].stack.map((t) => (
-                    <span key={t} className="font-mono text-[#1a1c1c] text-xs border-2 border-black px-2 py-0.5 uppercase">{t}</span>
-                  ))}
-                </div>
-              </div>
-              <div className="bg-black w-[266px] shrink-0 flex items-center justify-center p-8">
-                <div className="flex flex-col gap-4 items-center">
-                  <img alt="" className="size-[45px]" src={imgQRIcon} />
-                  <span className="font-mono text-white text-[10px] tracking-[1px] uppercase text-center">
-                    {siteConfig.projects[3].meta}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-          </div>
+          <BentoGrid />
         </div>
       </SlideUpSection>
 

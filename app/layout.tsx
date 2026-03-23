@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Space_Grotesk, JetBrains_Mono, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import ChatProvider from "./components/ChatProvider";
+import CustomCursor from "./components/CustomCursor";
+import SmoothScroll from "./components/SmoothScroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,7 +48,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${robotoMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col"><ChatProvider>{children}</ChatProvider></body>
+      <body className="min-h-full flex flex-col cursor-none"><SmoothScroll /><ChatProvider><CustomCursor />{children}</ChatProvider></body>
     </html>
   );
 }

@@ -31,17 +31,6 @@ export default function DossierPage() {
               CGPA: {education.cgpa} · {education.location}.
             </p>
           </div>
-          <div className="w-[66px] shrink-0">
-            <div className="bg-[#e2e2e2] border-[8px] border-black p-2 shadow-[8px_8px_0px_0px_black]">
-              <div className="relative overflow-hidden">
-                <img
-                  alt="Subject Portrait"
-                  className="w-full h-auto grayscale"
-                  src={imgSubjectPortrait}
-                />
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* ── Main Content Block ── */}
@@ -50,6 +39,31 @@ export default function DossierPage() {
             RESTRICTED_ACCESS // LEVEL_4
           </span>
           <div className="absolute bottom-4 left-4 bg-[#034694] h-1 w-24" />
+
+          {/* 00_ME */}
+          <div className="grid grid-cols-12 gap-12">
+            <div className="col-span-4 flex flex-col gap-6">
+              <div className="border-b-[4px] border-black pb-3">
+                <h2 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-[36px] tracking-[-1.8px] uppercase leading-10">
+                  00_ME
+                </h2>
+              </div>
+              <div className="flex flex-col font-[family-name:var(--font-code)] text-[#034694] text-sm leading-[17.5px]">
+                <p>SUBJECT: {siteConfig.name.toUpperCase()}</p>
+                <p>HANDLE: {siteConfig.handle}</p>
+                <p>CLEARANCE: {siteConfig.clearance}</p>
+              </div>
+            </div>
+            <div className="col-span-8 flex justify-center">
+              <div className="bg-[#e2e2e2] border-[6px] border-black shadow-[8px_8px_0px_0px_black] overflow-hidden w-[55%]">
+                <img
+                  alt="Subject Portrait"
+                  className="w-full h-auto"
+                  src="/me.png"
+                />
+              </div>
+            </div>
+          </div>
 
           {/* 01_ORIGIN */}
           <div className="grid grid-cols-12 gap-12">
