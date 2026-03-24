@@ -22,7 +22,7 @@ export default function TerminalLauncher() {
   }
 
   return (
-    <div className="flex gap-6 items-stretch w-full max-w-[672px] mb-16">
+    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-stretch w-full max-w-[672px] mb-10 md:mb-16 px-4 sm:px-0">
       <div className="flex-1 border-[4px] border-white flex items-center p-2">
         <span className="font-mono font-bold text-[#034694] text-base px-4">&gt;</span>
         <input
@@ -31,7 +31,7 @@ export default function TerminalLauncher() {
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Enter_Command... (try: whoami)"
-          className="flex-1 bg-transparent font-mono text-white text-base uppercase outline-none px-3 py-2.5 placeholder:text-[#404040]"
+          className="flex-1 bg-transparent font-mono text-white text-sm md:text-base uppercase outline-none px-3 py-2.5 placeholder:text-[#404040]"
           spellCheck={false}
           autoComplete="off"
           autoCapitalize="off"
@@ -39,7 +39,7 @@ export default function TerminalLauncher() {
       </div>
       <button
         onClick={launch}
-        className="bg-[#034694] border-[4px] border-black px-11 py-5 font-[family-name:var(--font-display)] font-bold text-white text-xl tracking-[2px] uppercase shadow-[8px_8px_0px_0px_black] shrink-0 hover:bg-[#023a7a] transition-colors"
+        className="bg-[#034694] border-[4px] border-black px-8 md:px-11 py-4 md:py-5 font-[family-name:var(--font-display)] font-bold text-white text-base md:text-xl tracking-[2px] uppercase shadow-[8px_8px_0px_0px_black] shrink-0 hover:bg-[#023a7a] transition-colors"
       >
         Initiate_Mission
       </button>

@@ -28,10 +28,10 @@ export default async function ProjectPage({
     <div className="bg-[#f9f9f9] flex flex-col min-h-screen">
       <Header />
 
-      <main className="pt-24">
+      <main className="pt-20 md:pt-24">
 
         {/* ── Back nav ── */}
-        <div className="px-6 pt-10 max-w-[1280px] mx-auto">
+        <div className="px-4 md:px-6 pt-8 md:pt-10 max-w-[1280px] mx-auto">
           <Link
             href="/missions"
             className="inline-flex items-center gap-2 font-[family-name:var(--font-data)] text-xs text-[#5e5e5e] uppercase tracking-[1.4px] hover:text-[#034694] transition-colors"
@@ -41,7 +41,7 @@ export default async function ProjectPage({
         </div>
 
         {/* ── Project Identity Header ── */}
-        <section className="px-6 pt-10 pb-12 max-w-[1280px] mx-auto">
+        <section className="px-4 md:px-6 pt-8 md:pt-10 pb-10 md:pb-12 max-w-[1280px] mx-auto">
           <div className="flex flex-col md:flex-row items-start md:items-end gap-8">
             {/* Diamond logo — matches Figma */}
             <div className="w-28 h-28 bg-black border-[6px] border-black shadow-[6px_6px_0px_0px_#034694] flex items-center justify-center shrink-0">
@@ -78,7 +78,7 @@ export default async function ProjectPage({
         />
 
         {/* ── Description + Motivation ── */}
-        <section className="px-6 mb-10 max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <section className="px-4 md:px-6 mb-10 max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="border-l-[4px] border-black pl-6">
             <h2 className="font-[family-name:var(--font-display)] font-bold text-black text-xl uppercase mb-3 tracking-tight">
               Description
@@ -94,7 +94,7 @@ export default async function ProjectPage({
         </section>
 
         {/* ── Action Buttons ── */}
-        <section className="px-6 mb-16 max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+        <section className="px-4 md:px-6 mb-16 max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
           <a
             href={ext.github}
             target="_blank"
@@ -124,11 +124,11 @@ export default async function ProjectPage({
         {/* ── Technical Whitepaper ── */}
         <section className="relative py-20">
           <BackgroundRippleEffect />
-          <div className="relative z-10 px-6 max-w-4xl mx-auto">
+          <div className="relative z-10 px-4 md:px-6 max-w-4xl mx-auto">
             <div className="bg-white border-[4px] border-black p-8 md:p-14 shadow-[8px_8px_0px_0px_black]">
 
               {/* Doc header */}
-              <div className="border-b-[4px] border-black pb-8 mb-8 flex justify-between items-start gap-6">
+              <div className="border-b-[4px] border-black pb-6 md:pb-8 mb-6 md:mb-8 flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 md:gap-6">
                 <div>
                   <div className="font-[family-name:var(--font-data)] text-xs uppercase text-[#034694] mb-2">
                     Technical Report // Ref: {ext.whitepaper.ref}
@@ -137,7 +137,7 @@ export default async function ProjectPage({
                     {ext.whitepaper.title}
                   </h3>
                 </div>
-                <div className="text-right font-[family-name:var(--font-data)] text-[10px] leading-loose uppercase shrink-0">
+                <div className="font-[family-name:var(--font-data)] text-[10px] leading-loose uppercase shrink-0 sm:text-right">
                   CLASSIFIED<br />TANAY_MATTA
                 </div>
               </div>
@@ -177,7 +177,7 @@ export default async function ProjectPage({
               </div>
 
               {/* Doc footer */}
-              <div className="mt-12 pt-4 border-t-2 border-black/10 flex justify-between items-center font-[family-name:var(--font-data)] text-[10px] uppercase text-[#a3a3a3]">
+              <div className="mt-10 md:mt-12 pt-4 border-t-2 border-black/10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 font-[family-name:var(--font-data)] text-[10px] uppercase text-[#a3a3a3]">
                 <span>TANAY_MATTA // ENGINEERING REPORTS</span>
                 <span>REF: {ext.whitepaper.ref}</span>
               </div>

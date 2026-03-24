@@ -15,18 +15,21 @@ export default function Header() {
   const { toggle } = useChatModal();
   const isHome = pathname === "/";
   const [visible, setVisible] = useState(!isHome);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!isHome) { setVisible(true); return; }
-
     const onScroll = () => {
       setVisible(window.scrollY > window.innerHeight * 0.65);
     };
-
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHome]);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   return (
     <header
@@ -34,14 +37,16 @@ export default function Header() {
         visible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="max-w-[1440px] mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
         <Link
           href="/"
-          className="font-[family-name:var(--font-display)] font-bold text-2xl text-black tracking-[-1.2px] uppercase"
+          className="font-[family-name:var(--font-display)] font-bold text-xl md:text-2xl text-black tracking-[-1.2px] uppercase"
         >
           TANAY MATTA
         </Link>
-        <nav className="flex gap-8 items-center">
+
+        {/* Desktop nav */}
+        <nav className="hidden md:flex gap-8 items-center">
           {navLinks.map(({ href, label }) => {
             const active = pathname === href;
             return (
@@ -59,13 +64,53 @@ export default function Header() {
             );
           })}
         </nav>
+
         <button
           onClick={toggle}
-          className="bg-[#034694] border-[4px] border-black px-7 py-3 font-[family-name:var(--font-display)] font-bold text-base text-white tracking-[-0.8px] uppercase shadow-[4px_4px_0px_0px_black] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
+          className="hidden md:block bg-[#034694] border-[4px] border-black px-7 py-3 font-[family-name:var(--font-display)] font-bold text-base text-white tracking-[-0.8px] uppercase shadow-[4px_4px_0px_0px_black] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
         >
           Chat with Tanya_Bot
         </button>
+
+        {/* Mobile right side */}
+        <div className="flex md:hidden items-center gap-3">
+          <button
+            onClick={toggle}
+            className="bg-[#034694] border-[3px] border-black px-3 py-2 font-[family-name:var(--font-display)] font-bold text-xs text-white tracking-[-0.5px] uppercase"
+          >
+            Chat
+          </button>
+          <button
+            onClick={() => setMenuOpen((o) => !o)}
+            className="border-[3px] border-black p-2 flex flex-col gap-1.5 justify-center items-center w-10 h-10"
+            aria-label="Toggle menu"
+          >
+            <span className={`block w-5 h-0.5 bg-black transition-transform duration-200 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block w-5 h-0.5 bg-black transition-opacity duration-200 ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-5 h-0.5 bg-black transition-transform duration-200 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          </button>
+        </div>
       </div>
+
+      {/* Mobile dropdown */}
+      {menuOpen && (
+        <div className="md:hidden bg-[#fafafa] border-t-[4px] border-black">
+          {navLinks.map(({ href, label }) => {
+            const active = pathname === href;
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`block px-6 py-4 font-[family-name:var(--font-display)] font-bold text-base tracking-[-0.8px] uppercase border-b-[2px] border-black transition-colors ${
+                  active ? "bg-black text-white" : "text-black hover:bg-black hover:text-white"
+                }`}
+              >
+                {label}
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </header>
   );
 }

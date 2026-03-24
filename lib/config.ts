@@ -125,7 +125,7 @@ export const siteConfig = {
       ref: "REF: KANGL-03",
       stack: ["Python", "LangGraph", "LangChain", "OpenAI API", "LangSmith", "FastAPI", "Docker"],
       desc: "Multi-agent AI system using LangGraph that autonomously scans codebases, detects frameworks, and generates deployment configurations via structured LLM reasoning pipelines.",
-      meta: "Status: Deployed",
+      meta: "Status: In Progress",
       dotColor: "bg-[#034694]",
       tag: "full" as const,
       video: "https://pub-b89bbe6de05c4dc4bc02906fe3d45c25.r2.dev/KanglAd.mp4",

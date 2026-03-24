@@ -10,6 +10,10 @@ export default function CustomCursor() {
   useEffect(() => {
     const el = cursorRef.current;
     if (!el) return;
+    if (!window.matchMedia("(pointer: fine)").matches) {
+      el.style.display = "none";
+      return;
+    }
 
     let raf: number;
 

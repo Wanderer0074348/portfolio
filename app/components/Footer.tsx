@@ -26,11 +26,11 @@ export default function Footer() {
           fill
         />
       </div>
-      <div className="max-w-[1440px] mx-auto px-8 py-10 flex items-center justify-between relative z-10">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-8 md:py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0 relative z-10">
         <span className="font-[family-name:var(--font-code)] text-white text-xs tracking-[1.2px] uppercase">
           ©{year} {siteConfig.name.toUpperCase().replace(" ", "_")}. ALL_RIGHTS_RESERVED.
         </span>
-        <div className="flex gap-8 items-center">
+        <div className="flex flex-wrap gap-4 md:gap-8 items-center">
           <Link href={contact.githubUrl} target="_blank" rel="noopener noreferrer" className="font-[family-name:var(--font-code)] text-[#a3a3a3] text-xs tracking-[1.2px] uppercase hover:text-white transition-colors">
             GITHUB
           </Link>

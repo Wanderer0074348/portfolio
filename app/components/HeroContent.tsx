@@ -12,7 +12,7 @@ export default function HeroContent({ children }: { children: ReactNode }) {
   return (
     <motion.div
       style={{ y, opacity, scale }}
-      className="max-w-[1440px] mx-auto relative z-10 flex gap-12 items-start"
+      className="max-w-[1440px] mx-auto relative z-10 flex flex-col md:flex-row gap-6 md:gap-12 items-start"
     >
       {children}
     </motion.div>

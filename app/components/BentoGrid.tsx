@@ -20,28 +20,27 @@ const viewport = { once: true, amount: 0.15 };
 export default function BentoGrid() {
   return (
     <motion.div
-      className="grid grid-cols-12 gap-8"
-      style={{ gridTemplateRows: "411.33px 275px" }}
+      className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8"
       initial="hidden"
       whileInView="visible"
       viewport={viewport}
     >
       {/* Large Feature — project[0]: HybridLM Engine */}
-      <motion.div variants={item(0)} className="col-span-8 relative bg-black border-[6px] border-black overflow-hidden p-[6px] shadow-[8px_8px_0px_0px_black] isolate">
+      <motion.div variants={item(0)} className="md:col-span-8 relative bg-black border-[6px] border-black overflow-hidden p-[6px] shadow-[8px_8px_0px_0px_black] isolate min-h-[360px] md:min-h-0 md:h-[411px]">
         <div className="absolute inset-0 z-[1]">
           <img alt="" className="w-full h-full object-cover" src={imgDigitalGridArchitecture} />
           <div className="absolute inset-0 bg-white mix-blend-saturation" />
         </div>
         <div className="absolute inset-0 bg-[rgba(3,70,148,0.3)] mix-blend-multiply z-[2]" />
-        <div className="absolute inset-[6px] bg-black z-[3] p-10 flex flex-col justify-between">
-          <div className="flex flex-col gap-4 pb-8">
+        <div className="absolute inset-[6px] bg-black z-[3] p-6 md:p-10 flex flex-col justify-between">
+          <div className="flex flex-col gap-3 md:gap-4 pb-6 md:pb-8">
             <span className="font-mono font-bold text-[#034694] text-sm tracking-[2.8px] uppercase">
               {siteConfig.projects[0].sector}
             </span>
-            <h3 className="font-[family-name:var(--font-display)] font-bold text-white text-[36px] tracking-[-1.8px] uppercase leading-10">
+            <h3 className="font-[family-name:var(--font-display)] font-bold text-white text-2xl md:text-[36px] tracking-[-1px] md:tracking-[-1.8px] uppercase leading-tight md:leading-10">
               {siteConfig.projects[0].title}
             </h3>
-            <p className="font-sans font-light text-[#a3a3a3] text-base leading-6">
+            <p className="font-sans font-light text-[#a3a3a3] text-sm md:text-base leading-6">
               {siteConfig.projects[0].desc}
             </p>
             <div className="flex flex-wrap gap-2 pt-2">
@@ -50,8 +49,8 @@ export default function BentoGrid() {
               ))}
             </div>
           </div>
-          <a href={`/missions/${siteConfig.projects[0].id}`} className="border-[4px] border-white flex gap-3 items-center px-7 py-4 w-fit">
-            <span className="font-[family-name:var(--font-display)] font-bold text-white text-base tracking-[1.6px] uppercase">
+          <a href={`/missions/${siteConfig.projects[0].id}`} className="border-[4px] border-white flex gap-3 items-center px-5 md:px-7 py-3 md:py-4 w-fit">
+            <span className="font-[family-name:var(--font-display)] font-bold text-white text-sm md:text-base tracking-[1.6px] uppercase">
               Access Files
             </span>
             <img alt="" className="size-4" src={imgAccessFilesArrow} />
@@ -60,7 +59,7 @@ export default function BentoGrid() {
       </motion.div>
 
       {/* Small Block 1 — project[1]: CrackIt */}
-      <motion.div variants={item(0.12)} className="col-span-4 bg-[#e8e8e8] border-[6px] border-black p-[38px] shadow-[8px_8px_0px_0px_black] flex flex-col justify-between">
+      <motion.div variants={item(0.12)} className="md:col-span-4 bg-[#e8e8e8] border-[6px] border-black p-8 md:p-[38px] shadow-[8px_8px_0px_0px_black] flex flex-col justify-between md:h-[411px]">
         <div className="flex flex-col gap-3">
           <div className="bg-black size-12 flex items-center justify-center shrink-0">
             <img alt="" className="size-[18px]" src={imgDataStreamIcon} />
@@ -83,9 +82,9 @@ export default function BentoGrid() {
       </motion.div>
 
       {/* Small Block 2 — project[2]: KanGL */}
-      <motion.div variants={item(0.22)} className="col-span-4">
+      <motion.div variants={item(0.22)} className="md:col-span-4 md:h-[275px]">
         <Link href={`/missions/${siteConfig.projects[2].id}`} className="block h-full">
-          <div className="h-full bg-[#034694] border-[6px] border-black p-[38px] shadow-[8px_8px_0px_0px_black] flex flex-col justify-between hover:shadow-[12px_12px_0px_0px_black] transition-shadow">
+          <div className="h-full bg-[#034694] border-[6px] border-black p-8 md:p-[38px] shadow-[8px_8px_0px_0px_black] flex flex-col justify-between hover:shadow-[12px_12px_0px_0px_black] transition-shadow">
             <div className="flex flex-col gap-3">
               <div className="bg-black px-2 py-1 w-fit">
                 <span className="font-sans font-bold text-white text-[10px] tracking-[3px] uppercase">
@@ -108,8 +107,8 @@ export default function BentoGrid() {
       </motion.div>
 
       {/* Medium Block — Currently at ESRI */}
-      <motion.div variants={item(0.32)} className="col-span-8 bg-[#f9f9f9] border-[6px] border-black overflow-hidden shadow-[8px_8px_0px_0px_black] flex">
-        <div className="flex-1 p-8 flex flex-col justify-between">
+      <motion.div variants={item(0.32)} className="md:col-span-8 bg-[#f9f9f9] border-[6px] border-black overflow-hidden shadow-[8px_8px_0px_0px_black] flex md:h-[275px]">
+        <div className="flex-1 p-6 md:p-8 flex flex-col justify-between">
           <div className="flex items-center gap-3">
             <span className="bg-[#034694] px-2 py-0.5 font-mono font-bold text-white text-[10px] tracking-[2px] uppercase">
               Live
@@ -119,7 +118,7 @@ export default function BentoGrid() {
             </span>
           </div>
           <div className="flex flex-col gap-2">
-            <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-[30px] tracking-[-1.5px] uppercase leading-9">
+            <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-2xl md:text-[30px] tracking-[-1px] md:tracking-[-1.5px] uppercase leading-tight md:leading-9">
               Interning at ESRI
             </h3>
             <p className="font-sans font-normal text-[#5e5e5e] text-sm leading-5">
@@ -127,7 +126,7 @@ export default function BentoGrid() {
             </p>
           </div>
         </div>
-        <div className="bg-black w-[266px] shrink-0">
+        <div className="bg-black w-[140px] md:w-[266px] shrink-0">
           <img alt="ESRI" className="w-full h-full object-cover" src="/Esri.png" />
         </div>
       </motion.div>

@@ -185,6 +185,18 @@ export default function TerminalPage() {
         body: JSON.stringify({ message: raw.trim(), history: apiHistory }),
       });
 
+      if (res.status === 429) {
+        setMessages((prev) => [
+          ...prev.slice(0, -1),
+          {
+            role: "agent",
+            lines: [{ type: "error", text: "Sorry, I had to rate-limit you! This is because I'm paying for the AI from my pocket, and I'm still a student 😅" }],
+            timestamp: timestamp(),
+          },
+        ]);
+        setIsLoading(false);
+        return;
+      }
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       const text: string = data.response ?? "";
@@ -204,7 +216,7 @@ export default function TerminalPage() {
         ...prev.slice(0, -1),
         {
           role: "agent",
-          lines: [{ type: "error", text: `CONNECTION_ERROR: ${err instanceof Error ? err.message : "Unknown"}` }],
+          lines: [{ type: "error", text: "Sorry, that request didn't work — try again!" }],
           timestamp: timestamp(),
         },
       ]);

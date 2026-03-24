@@ -41,8 +41,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-*, *::before, *::after {
-  cursor: none !important;
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
 }
 
 #custom-cursor[data-pointer="1"] #cursor-arrow   { display: none;  }
