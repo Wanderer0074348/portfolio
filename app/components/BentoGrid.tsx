@@ -40,7 +40,7 @@ export default function BentoGrid() {
             <h3 className="font-[family-name:var(--font-display)] font-bold text-white text-2xl md:text-[36px] tracking-[-1px] md:tracking-[-1.8px] uppercase leading-tight md:leading-10">
               {siteConfig.projects[0].title}
             </h3>
-            <p className="font-sans font-light text-[#a3a3a3] text-sm md:text-base leading-6">
+            <p className="font-sans font-light text-[#a3a3a3] text-sm md:text-base leading-6 line-clamp-3 md:line-clamp-none">
               {siteConfig.projects[0].desc}
             </p>
             <div className="flex flex-wrap gap-2 pt-2">
@@ -82,7 +82,7 @@ export default function BentoGrid() {
       </motion.div>
 
       {/* Small Block 2 — project[2]: KanGL */}
-      <motion.div variants={item(0.22)} className="md:col-span-4 md:h-[275px]">
+      <motion.div variants={item(0.22)} className="md:col-span-4 min-h-[220px] md:min-h-0 md:h-[275px]">
         <Link href={`/missions/${siteConfig.projects[2].id}`} className="block h-full">
           <div className="h-full bg-[#034694] border-[6px] border-black p-8 md:p-[38px] shadow-[8px_8px_0px_0px_black] flex flex-col justify-between hover:shadow-[12px_12px_0px_0px_black] transition-shadow">
             <div className="flex flex-col gap-3">
@@ -107,7 +107,10 @@ export default function BentoGrid() {
       </motion.div>
 
       {/* Medium Block — Currently at ESRI */}
-      <motion.div variants={item(0.32)} className="md:col-span-8 bg-[#f9f9f9] border-[6px] border-black overflow-hidden shadow-[8px_8px_0px_0px_black] flex md:h-[275px]">
+      <motion.div variants={item(0.32)} className="md:col-span-8 bg-[#f9f9f9] border-[6px] border-black overflow-hidden shadow-[8px_8px_0px_0px_black] flex flex-col md:flex-row md:h-[275px]">
+        <div className="bg-black h-[160px] md:hidden shrink-0">
+          <img alt="ESRI" className="w-full h-full object-cover" src="/Esri.png" />
+        </div>
         <div className="flex-1 p-6 md:p-8 flex flex-col justify-between">
           <div className="flex items-center gap-3">
             <span className="bg-[#034694] px-2 py-0.5 font-mono font-bold text-white text-[10px] tracking-[2px] uppercase">
@@ -126,7 +129,7 @@ export default function BentoGrid() {
             </p>
           </div>
         </div>
-        <div className="bg-black w-[140px] md:w-[266px] shrink-0">
+        <div className="hidden md:block bg-black w-[266px] shrink-0">
           <img alt="ESRI" className="w-full h-full object-cover" src="/Esri.png" />
         </div>
       </motion.div>

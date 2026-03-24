@@ -22,7 +22,7 @@ export default function Home() {
       {/* ── Hero Section ── */}
       <section className="bg-black border-b-[6px] border-black pt-[48px] pb-[86px] px-4 md:px-6 relative overflow-hidden sticky top-0 z-10 min-h-screen">
         <div className="max-w-[1440px] mx-auto mb-4 md:mb-6 relative z-10">
-          <h2 className="font-[family-name:var(--font-display)] font-bold text-white text-[48px] sm:text-[80px] md:text-[120px] lg:text-[160px] tracking-[-2px] sm:tracking-[-4px] md:tracking-[-6px] lg:tracking-[-8px] uppercase leading-[1]">
+          <h2 className="font-[family-name:var(--font-display)] font-bold text-white text-[96px] sm:text-[80px] md:text-[120px] lg:text-[160px] tracking-[-4px] sm:tracking-[-4px] md:tracking-[-6px] lg:tracking-[-8px] uppercase leading-[1]">
             Hey, I&apos;m <span className="text-[#034694]">Tanay</span>
           </h2>
         </div>
