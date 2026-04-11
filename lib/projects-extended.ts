@@ -111,4 +111,109 @@ export const projectsExtended = {
       ],
     },
   },
+
+  relay: {
+    github: "https://github.com/Wanderer0074348/relay",
+    live: "",
+    video: "",
+    motivation:
+      "AI agents and coding tools have rate limits. When Claude Code hits its ceiling, Relay smoothly hands off your full session context to alternative agents, keeping your workflow uninterrupted.",
+    whitepaper: {
+      ref: "0x006F",
+      title: "Cross-Agent Session Handoff in Relay",
+      abstract:
+        "Relay implements a context-preserving handoff mechanism that enables seamless session transfer between multiple AI agents when rate limits are encountered, maintaining conversation state and execution context across different platforms.",
+      architecture:
+        "Session context is serialized into a portable format and transmitted to target agents (Codex, Gemini, Aider, etc.) via a unified handoff protocol, preserving message history, file state, and execution environment.",
+      stats: [
+        { key: "SUPPORTED_AGENTS", val: "5+"         },
+        { key: "CONTEXT_PRESERVATION", val: "100%"  },
+        { key: "HANDOFF_LATENCY", val: "<500ms"     },
+      ],
+    },
+  },
+
+  resbook: {
+    github: "https://github.com/Wanderer0074348/ResBook",
+    live: "",
+    video: "",
+    motivation:
+      "Restaurant reservations shouldn't be complicated. ResBook streamlines the entire booking experience for customers while providing managers with powerful tools to optimize seating, staffing, and operations.",
+    whitepaper: {
+      ref: "0x0070",
+      title: "Restaurant Management Platform Architecture",
+      abstract:
+        "ResBook is a full-stack restaurant reservation and management system providing real-time booking, table optimization, and operational analytics.",
+      architecture:
+        "React frontend with TypeScript for responsive UI, Node.js backend with PostgreSQL for reliable data persistence, real-time updates via WebSocket.",
+      stats: [
+        { key: "MODULES", val: "Booking, Analytics, Staffing" },
+        { key: "TECH_STACK", val: "MERN"                      },
+        { key: "RESPONSE_TIME", val: "<100ms"                 },
+      ],
+    },
+  },
+
+  plotter: {
+    github: "https://github.com/Wanderer0074348/Plotter",
+    live: "",
+    video: "",
+    motivation:
+      "Data visualization is crucial for understanding complex datasets. Plotter provides an intuitive interface for creating publication-quality charts and interactive visualizations.",
+    whitepaper: {
+      ref: "0x0071",
+      title: "Interactive Data Visualization Library",
+      abstract:
+        "Plotter is a Python-based visualization utility enabling rapid generation of professional charts and graphs from diverse data sources.",
+      architecture:
+        "Built on Matplotlib and Pandas, providing high-level APIs for common visualization patterns with support for custom styling and interactive elements.",
+      stats: [
+        { key: "SUPPORTED_CHARTS", val: "15+"       },
+        { key: "DATA_FORMATS", val: "CSV, JSON, SQL" },
+        { key: "CUSTOMIZATION", val: "Full"         },
+      ],
+    },
+  },
+
+  geovisionquest: {
+    github: "https://github.com/Wanderer0074348/GeoVisionQuest",
+    live: "",
+    video: "",
+    motivation:
+      "Combining geospatial data with computer vision opens new possibilities for location intelligence. GeoVisionQuest was built during a hackathon to demonstrate real-time geographic analysis from visual input.",
+    whitepaper: {
+      ref: "0x0072",
+      title: "Geospatial Computer Vision Integration",
+      abstract:
+        "GeoVisionQuest integrates computer vision with geographic information systems to enable location-based visual intelligence tasks during hackathon competition.",
+      architecture:
+        "OpenCV for image processing, geospatial libraries for coordinate transformation, Flask backend for API exposure.",
+      stats: [
+        { key: "ACCURACY", val: "Hackathon Grade"    },
+        { key: "PROCESSING_TIME", val: "<2s per image" },
+        { key: "PROJECT_TYPE", val: "Hackathon"      },
+      ],
+    },
+  },
+
+  sstr: {
+    github: "https://github.com/Wanderer0074348/S.S.T.R",
+    live: "",
+    video: "",
+    motivation:
+      "Built during a hackathon sprint, S.S.T.R demonstrates rapid prototyping of AI systems with focus on specialized task automation and intelligent response generation.",
+    whitepaper: {
+      ref: "0x0073",
+      title: "Hackathon AI System for Specialized Tasks",
+      abstract:
+        "S.S.T.R is a specialized AI system developed during a hackathon, showcasing fast iteration and practical application of machine learning techniques.",
+      architecture:
+        "FastAPI backend with integrated ML models, Python-based task automation pipeline.",
+      stats: [
+        { key: "PROJECT_TYPE", val: "Hackathon"      },
+        { key: "EXECUTION_TIME", val: "24-48 hours" },
+        { key: "FOCUS_AREA", val: "AI Automation"   },
+      ],
+    },
+  },
 } as const;

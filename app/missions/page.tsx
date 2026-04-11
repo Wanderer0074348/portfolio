@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -10,12 +10,17 @@ import { useChatModal } from "../components/ChatProvider";
 const imgArrow           = "https://www.figma.com/api/mcp/asset/1b067e79-3482-4d59-a1bd-3f62b4a64827";
 const imgManuscriptArrow = "https://www.figma.com/api/mcp/asset/d05f5596-4895-498d-86d8-eb22d291eb12";
 
-const PROJECT_IMGS = [
+const PROJECT_IMGS: (string | null)[] = [
   "https://www.figma.com/api/mcp/asset/9d4352fd-0adf-4bf0-bfbb-80dc5bd775f6",
   "https://www.figma.com/api/mcp/asset/c7a1aa6a-140d-41f5-bad8-d7a4cb4f4092",
   "https://www.figma.com/api/mcp/asset/c5431d79-d84e-42ee-a234-e3a1119b3d16",
   "https://www.figma.com/api/mcp/asset/1d2ad0fa-4c0c-4320-8b91-5c6f1d878257",
   "https://www.figma.com/api/mcp/asset/c2435178-dcf5-4011-b69e-52047c558bdf",
+  null,
+  null,
+  null,
+  null,
+  null,
 ];
 
 const FILTERS = ["Full_Portfolio", "Projects", "Experience", "Club_Work"] as const;
@@ -32,6 +37,12 @@ const COMPANY_IMAGES: Record<string, string> = {
 export default function MissionsPage() {
   const [activeFilter, setActiveFilter] = useState<Filter>("Full_Portfolio");
   const [selectedExp, setSelectedExp] = useState<typeof siteConfig.experience[number] | null>(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.dispatchEvent(new Event("filterChanged"));
+    }, 50);
+  }, [activeFilter]);
 
   return (
     <div className="bg-[#f9f9f9] flex flex-col min-h-screen">
@@ -89,7 +100,13 @@ export default function MissionsPage() {
                 <div className="bg-white border-[4px] border-black flex flex-col shadow-[8px_8px_0px_0px_black] p-1 isolate group-hover:shadow-[12px_12px_0px_0px_black] transition-shadow">
                   <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
                     <div className="h-[180px] md:h-[207px] relative">
-                      <img alt="" className="absolute inset-0 w-full h-[181%] max-w-none object-cover grayscale top-[-40%]" src={PROJECT_IMGS[i]} />
+                      {PROJECT_IMGS[i] ? (
+                        <img alt="" className="absolute inset-0 w-full h-[181%] max-w-none object-cover grayscale top-[-40%]" src={PROJECT_IMGS[i]} />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#d4d4d4] to-[#a3a3a3] flex items-center justify-center">
+                          <span className="font-[family-name:var(--font-code)] text-[#737373] text-xs uppercase text-center">Image Coming Soon</span>
+                        </div>
+                      )}
                     </div>
                     <div className="absolute top-4 left-4 bg-black px-2 py-1">
                       <span className="font-[family-name:var(--font-data)] font-bold text-[#034694] text-xs uppercase">{p.sector}</span>
@@ -155,7 +172,13 @@ export default function MissionsPage() {
               <div className="bg-white border-[4px] border-black flex flex-col shadow-[8px_8px_0px_0px_black] p-1 isolate group-hover:shadow-[12px_12px_0px_0px_black] transition-shadow h-full">
                 <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
                   <div className="h-[180px] md:h-[207px] relative">
-                    <img alt="" className="absolute inset-0 w-full h-[181%] max-w-none object-cover grayscale top-[-40%]" src={PROJECT_IMGS[3]} />
+                    {PROJECT_IMGS[3] ? (
+                      <img alt="" className="absolute inset-0 w-full h-[181%] max-w-none object-cover grayscale top-[-40%]" src={PROJECT_IMGS[3]} />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#d4d4d4] to-[#a3a3a3] flex items-center justify-center">
+                        <span className="font-[family-name:var(--font-code)] text-[#737373] text-xs uppercase text-center">Image Coming Soon</span>
+                      </div>
+                    )}
                   </div>
                   <div className="absolute top-4 left-4 bg-black px-2 py-1">
                     <span className="font-[family-name:var(--font-data)] font-bold text-[#034694] text-xs uppercase">{siteConfig.projects[3].sector}</span>
@@ -203,11 +226,17 @@ export default function MissionsPage() {
                 <div className="bg-white border-[4px] border-black flex flex-col shadow-[8px_8px_0px_0px_black] p-1 isolate group-hover:shadow-[12px_12px_0px_0px_black] transition-shadow">
                   <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
                     <div className="h-[180px] md:h-[207px] relative">
-                      <img
-                        alt=""
-                        className="absolute inset-0 w-full h-[181%] max-w-none object-cover grayscale top-[-40%]"
-                        src={PROJECT_IMGS[i] ?? PROJECT_IMGS[0]}
-                      />
+                      {PROJECT_IMGS[i] ? (
+                        <img
+                          alt=""
+                          className="absolute inset-0 w-full h-[181%] max-w-none object-cover grayscale top-[-40%]"
+                          src={PROJECT_IMGS[i]}
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#d4d4d4] to-[#a3a3a3] flex items-center justify-center">
+                          <span className="font-[family-name:var(--font-code)] text-[#737373] text-xs uppercase text-center">Image Coming Soon</span>
+                        </div>
+                      )}
                     </div>
                     <div className="absolute top-4 left-4 bg-black px-2 py-1">
                       <span className="font-[family-name:var(--font-data)] font-bold text-[#034694] text-xs uppercase">
