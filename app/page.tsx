@@ -10,7 +10,11 @@ import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 import BentoGrid from "./components/BentoGrid";
 import { siteConfig } from "@/lib/config";
 
-const imgViewAllArrow = "https://www.figma.com/api/mcp/asset/bd32461d-b298-4312-9757-f69db85fc549";
+const ArrowIcon = () => (
+  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M5 12h14M12 5l7 7-7 7" />
+  </svg>
+);
 
 
 
@@ -80,7 +84,7 @@ export default function Home() {
               </p>
             </div>
             <a href="/missions" className="flex gap-4 items-center border-b-[4px] border-black pb-3 px-4 w-fit">
-              <img alt="" className="h-4 w-5" src={imgViewAllArrow} />
+              <span className="h-4 w-5 text-black"><ArrowIcon /></span>
               <span className="font-mono font-bold text-[#1a1c1c] text-sm tracking-[1.4px] uppercase">
                 View All Projects
               </span>
@@ -104,7 +108,7 @@ export default function Home() {
           {/* Desktop heading — absolute positioned layout */}
           <div className="hidden md:block relative w-full max-w-[896px] h-[208px] mb-12">
             <div className="absolute left-1/2 -translate-x-1/2 top-[8px] font-[family-name:var(--font-display)] font-bold text-white text-[96px] tracking-[-4.8px] uppercase leading-[96px] whitespace-nowrap">
-              Ready to
+              Ready to Chat
             </div>
             <div
               className="absolute top-[-7px] flex items-center justify-center"
@@ -113,53 +117,35 @@ export default function Home() {
               <div className="-rotate-2">
                 <div className="bg-[#034694] px-4 py-2">
                   <span className="font-[family-name:var(--font-display)] font-bold text-white text-[96px] tracking-[-4.8px] uppercase leading-[96px]">
-                    Explore
+                    with
                   </span>
                 </div>
               </div>
             </div>
             <div className="absolute left-1/2 -translate-x-1/2 top-[112px] font-[family-name:var(--font-display)] font-bold text-white text-[96px] tracking-[-4.8px] uppercase leading-[96px] whitespace-nowrap">
-              the Unseen?
+              Tanya Bot?
             </div>
           </div>
 
           {/* Mobile heading — simple stacked */}
           <div className="flex flex-col items-center gap-2 mb-10 md:hidden">
             <span className="font-[family-name:var(--font-display)] font-bold text-white text-[44px] tracking-[-2px] uppercase leading-[1]">
-              Ready to
+              Ready to Chat
             </span>
             <div className="-rotate-1">
               <div className="bg-[#034694] px-4 py-1">
                 <span className="font-[family-name:var(--font-display)] font-bold text-white text-[44px] tracking-[-2px] uppercase leading-[1]">
-                  Explore
+                  with
                 </span>
               </div>
             </div>
             <span className="font-[family-name:var(--font-display)] font-bold text-white text-[44px] tracking-[-2px] uppercase leading-[1]">
-              the Unseen?
+              Tanya Bot?
             </span>
           </div>
 
           {/* Input + Button */}
           <TerminalLauncher />
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-            {siteConfig.stats.map((stat) => (
-              <div key={stat.label} className="flex flex-col gap-2 items-center">
-                <span
-                  className={`font-mono font-bold text-lg tracking-[1px] uppercase ${
-                    "highlight" in stat && stat.highlight ? "text-[#034694]" : "text-white"
-                  }`}
-                >
-                  {stat.value}
-                </span>
-                <span className="font-mono text-[#737373] text-[10px] tracking-[1px] uppercase">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
-          </div>
 
         </div>
       </section>

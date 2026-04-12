@@ -104,6 +104,7 @@ export const siteConfig = {
       tag: "progress" as const,
       video: "https://pub-b89bbe6de05c4dc4bc02906fe3d45c25.r2.dev/HybridLM.mp4",
       report: "/reports/HybridLM.pdf", // "/reports/filename.pdf" for public/reports/ files
+      image: "/projects/i1.jpg",
     },
     {
       id: "crackit",
@@ -117,6 +118,7 @@ export const siteConfig = {
       tag: "full" as const,
       video: "",
       report: "", // "/reports/filename.pdf" for public/reports/ files
+      image: "/projects/i2.jpg",
     },
     {
       id: "kangl",
@@ -130,6 +132,7 @@ export const siteConfig = {
       tag: "full" as const,
       video: "https://pub-b89bbe6de05c4dc4bc02906fe3d45c25.r2.dev/KanglAd.mp4",
       report: "", // "/reports/filename.pdf" for public/reports/ files
+      image: "/projects/i3.jpg",
     },
     {
       id: "plgrzr",
@@ -143,6 +146,7 @@ export const siteConfig = {
       tag: "archived" as const,
       video: "",
       report: "", // "/reports/filename.pdf" for public/reports/ files
+      image: "/projects/i4.jpg",
     },
     {
       id: "arsidet",
@@ -156,6 +160,7 @@ export const siteConfig = {
       tag: "archived" as const,
       video: "",
       report: "", // "/reports/filename.pdf" for public/reports/ files
+      image: "/projects/i1.jpg",
     },
     {
       id: "relay",
@@ -169,6 +174,7 @@ export const siteConfig = {
       tag: "progress" as const,
       video: "https://pub-b89bbe6de05c4dc4bc02906fe3d45c25.r2.dev/relay-demo.mp4",
       report: "",
+      image: "/projects/i2.jpg",
     },
     {
       id: "resbook",
@@ -182,6 +188,7 @@ export const siteConfig = {
       tag: "progress" as const,
       video: "",
       report: "",
+      image: "/projects/i3.jpg",
     },
     {
       id: "plotter",
@@ -195,6 +202,7 @@ export const siteConfig = {
       tag: "full" as const,
       video: "https://pub-b89bbe6de05c4dc4bc02906fe3d45c25.r2.dev/Plotter-demo.mp4",
       report: "",
+      image: "/projects/i4.jpg",
     },
   ],
 
@@ -202,29 +210,63 @@ export const siteConfig = {
   hackathonProjects: [
     {
       id: "geovisionquest",
-      title: "GeoVisionQuest",
+      hackathonName: "Kaggle: OpenAI to Z Challenge Hackathon",
+      projectTitle: "GeoVisionQuest",
       sector: "Computer_Vision",
       ref: "REF: GEO-09",
-      stack: ["Python", "OpenCV", "Flask", "TensorFlow"],
-      desc: "Geographic vision challenge system combining computer vision and geospatial analysis for location-based intelligence tasks.",
-      meta: "Hackathon Project",
+      stack: ["Python", "OpenCV", "TensorFlow", "Satellite Imagery"],
+      desc: "AI-powered discovery system that analyzes satellite imagery of the Brazilian Amazon to detect and identify previously unknown hidden geoglyphs—ancient large-scale earthwork designs—using advanced computer vision and machine learning techniques.",
+      meta: "Kaggle Hackathon",
       dotColor: "bg-[#f59e0b]",
       tag: "archived" as const,
-      video: "",
-      report: "",
+      github: "https://github.com/Wanderer0074348/TTKB",
+      deployment: "https://www.kaggle.com/competitions/openai-to-z-challenge/writeups/geovisionquest-ai-powered-discovery-of-hidden-geog",
+      image: "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=600&q=80",
+    },
+    {
+      id: "dcube",
+      hackathonName: "DAFZA x Wellington Campus Hackathon",
+      projectTitle: "D-Cube",
+      sector: "AI_Systems",
+      ref: "REF: DCUBE-10",
+      stack: ["Python", "Streamlit", "Route Optimization"],
+      desc: "Advanced drone delivery route optimization system that plans efficient multi-depot delivery paths while accounting for no-fly zones, battery limitations, and complex logistics constraints. Winner of the DAFZA x Wellington Hackathon with 20,000 AED prize.",
+      meta: "1st Place • 20,000 AED Prize",
+      dotColor: "bg-[#f59e0b]",
+      tag: "progress" as const,
+      github: "https://github.com/Wanderer0074348/DAFZA",
+      deployment: "https://dafzahack.streamlit.app",
+      image: "/hackathons/Dafza.png",
     },
     {
       id: "sstr",
-      title: "S.S.T.R",
+      hackathonName: "ACM Impactathon: Inter-University Hackathon",
+      projectTitle: "S.S.T.R",
       sector: "AI_Systems",
-      ref: "REF: SSTR-10",
-      stack: ["Python", "FastAPI", "Machine Learning"],
-      desc: "Intelligent system leveraging AI for specialized task automation and real-time response generation.",
-      meta: "Hackathon Project",
+      ref: "REF: SSTR-11",
+      stack: ["Streamlit", "Ollama", "DeepSeek", "PyMuPDF"],
+      desc: "AI agent for generating realistic phishing simulations for corporate security awareness training. Supports document uploads for organizational context, nine predefined scenarios plus custom options, and sandboxed testing through MailHog with local encryption for sensitive data protection.",
+      meta: "4th Place • ACM BPDC",
       dotColor: "bg-[#f59e0b]",
       tag: "archived" as const,
-      video: "",
-      report: "",
+      github: "https://github.com/Wanderer0074348/S.S.T.R",
+      deployment: "",
+      image: "/hackathons/Acm.png",
+    },
+    {
+      id: "donnaai",
+      hackathonName: "Ruya AI Hackathon",
+      projectTitle: "Donna AI",
+      sector: "Agentic_AI",
+      ref: "REF: DONNA-12",
+      stack: ["TypeScript", "Express", "LangGraph", "Claude API", "React"],
+      desc: "AI-native compliance operations platform automating KYC screening with multi-agent intelligence workflows. Orchestrates five parallel web intelligence agents for sanctions/risk screening, applies AI-based risk scoring, constructs corporate knowledge graphs, and enables analyst feedback loops for continuous learning.",
+      meta: "Hackathon Project",
+      dotColor: "bg-[#f59e0b]",
+      tag: "progress" as const,
+      github: "https://github.com/Wanderer0074348/DonnaAI",
+      deployment: "",
+      image: "/hackathons/Ruya.png",
     },
   ],
 

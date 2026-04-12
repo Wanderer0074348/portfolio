@@ -41,7 +41,7 @@ export default function TerminalLauncher() {
         onClick={launch}
         className="bg-[#034694] border-[4px] border-black px-8 md:px-11 py-4 md:py-5 font-[family-name:var(--font-display)] font-bold text-white text-base md:text-xl tracking-[2px] uppercase shadow-[8px_8px_0px_0px_black] shrink-0 hover:bg-[#023a7a] transition-colors"
       >
-        Initiate_Mission
+        Chat_With_Tanya_Bot
       </button>
     </div>
   );

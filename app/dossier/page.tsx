@@ -2,8 +2,11 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { siteConfig } from "@/lib/config";
 
-const imgSubjectPortrait = "https://www.figma.com/api/mcp/asset/f79df68d-02ee-48c6-92e4-884babf59c07";
-const imgSkillIcon = "https://www.figma.com/api/mcp/asset/c7efbfb7-bfec-4e00-8821-9a5922311427";
+const SkillCheckIcon = () => (
+  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
 
 const { experience, education, skillTiles, contact, achievements, certifications, leadership } = siteConfig;
 
@@ -164,7 +167,7 @@ export default function DossierPage() {
                   key={label}
                   className={`${bg} ${border ? "border-[4px] border-black p-5 md:p-7" : "p-4 md:p-6"} flex flex-col items-start justify-between min-h-[160px] md:min-h-[233px]`}
                 >
-                  <img alt="" className="h-[22px] md:h-[28px] w-auto" src={imgSkillIcon} />
+                  <span className="h-[22px] md:h-[28px] w-[22px] md:w-[28px] text-[#034694]"><SkillCheckIcon /></span>
                   <div className={`font-[family-name:var(--font-display)] font-bold ${text} text-base md:text-xl uppercase leading-5`}>
                     {label.split("\n").map((line, i) => (
                       <p key={i}>{line}</p>

@@ -4,11 +4,26 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { siteConfig } from "@/lib/config";
 
-const imgDigitalGridArchitecture = "https://www.figma.com/api/mcp/asset/94856324-3b83-4e31-a78d-f57d923d6f3a";
-const imgAccessFilesArrow        = "https://www.figma.com/api/mcp/asset/2fa42a80-405b-4c50-931d-a9fbd93ae798";
-const imgDataStreamIcon          = "https://www.figma.com/api/mcp/asset/aa473288-c52f-48bb-9302-279f0ed5dc3b";
-const imgInspectArrow            = "https://www.figma.com/api/mcp/asset/56825ccb-3aed-459d-a939-24931c869a9b";
-const imgGlobeIcon               = "https://www.figma.com/api/mcp/asset/2168fbe8-a6ad-464e-bfb9-25da9249403a";
+const ArrowIcon = () => (
+  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M5 12h14M12 5l7 7-7 7" />
+  </svg>
+);
+
+const GlobeIcon = () => (
+  <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </svg>
+);
+
+const DataStreamIcon = () => (
+  <svg className="w-full h-full" viewBox="0 0 24 24" fill="currentColor">
+    <circle cx="12" cy="12" r="2" />
+    <circle cx="19" cy="12" r="2" />
+    <circle cx="5" cy="12" r="2" />
+  </svg>
+);
 
 const item = (delay: number) => ({
   hidden:  { y: 32, opacity: 0 },
@@ -25,44 +40,35 @@ export default function BentoGrid() {
       whileInView="visible"
       viewport={viewport}
     >
-      {/* Large Feature — project[0]: HybridLM Engine */}
+      {/* Large Feature — Samsung Innovation Campus */}
       <motion.div variants={item(0)} className="md:col-span-8 relative bg-black border-[6px] border-black overflow-hidden p-[6px] shadow-[8px_8px_0px_0px_black] isolate min-h-[360px] md:min-h-0 md:h-[411px]">
+        {/* Background Image */}
         <div className="absolute inset-0 z-[1]">
-          <img alt="" className="w-full h-full object-cover" src={imgDigitalGridArchitecture} />
-          <div className="absolute inset-0 bg-white mix-blend-saturation" />
+          <img alt="Samsung Innovation Campus" className="w-full h-full object-cover" src="/SIC.png" />
+          <div className="absolute inset-0 bg-black/70" />
         </div>
-        <div className="absolute inset-0 bg-[rgba(3,70,148,0.3)] mix-blend-multiply z-[2]" />
-        <div className="absolute inset-[6px] bg-black z-[3] p-6 md:p-10 flex flex-col justify-between">
-          <div className="flex flex-col gap-3 md:gap-4 pb-6 md:pb-8">
+
+        {/* Content */}
+        <div className="absolute inset-[6px] bg-black/50 z-[2] p-6 md:p-10 flex flex-col justify-between backdrop-blur-sm">
+          <div className="flex flex-col gap-3 md:gap-4">
             <span className="font-mono font-bold text-[#034694] text-sm tracking-[2.8px] uppercase">
-              {siteConfig.projects[0].sector}
+              Achievement
             </span>
             <h3 className="font-[family-name:var(--font-display)] font-bold text-white text-2xl md:text-[36px] tracking-[-1px] md:tracking-[-1.8px] uppercase leading-tight md:leading-10">
-              {siteConfig.projects[0].title}
+              Samsung Innovation<br />Campus Graduate<br />2024
             </h3>
-            <p className="font-sans font-light text-[#a3a3a3] text-sm md:text-base leading-6 line-clamp-3 md:line-clamp-none">
-              {siteConfig.projects[0].desc}
+            <p className="font-sans font-light text-[#a3a3a3] text-sm md:text-base leading-6">
+              Final Score: 92/100
             </p>
-            <div className="flex flex-wrap gap-2 pt-2">
-              {siteConfig.projects[0].stack.slice(0, 4).map((t) => (
-                <span key={t} className="font-mono text-[#737373] text-xs border border-[#404040] px-2 py-0.5 uppercase">{t}</span>
-              ))}
-            </div>
           </div>
-          <a href={`/missions/${siteConfig.projects[0].id}`} className="border-[4px] border-white flex gap-3 items-center px-5 md:px-7 py-3 md:py-4 w-fit">
-            <span className="font-[family-name:var(--font-display)] font-bold text-white text-sm md:text-base tracking-[1.6px] uppercase">
-              Access Files
-            </span>
-            <img alt="" className="size-4" src={imgAccessFilesArrow} />
-          </a>
         </div>
       </motion.div>
 
       {/* Small Block 1 — project[1]: CrackIt */}
       <motion.div variants={item(0.12)} className="md:col-span-4 bg-[#e8e8e8] border-[6px] border-black p-8 md:p-[38px] shadow-[8px_8px_0px_0px_black] flex flex-col justify-between md:h-[411px]">
         <div className="flex flex-col gap-3">
-          <div className="bg-black size-12 flex items-center justify-center shrink-0">
-            <img alt="" className="size-[18px]" src={imgDataStreamIcon} />
+          <div className="bg-black size-12 flex items-center justify-center shrink-0 text-white">
+            <DataStreamIcon />
           </div>
           <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-2xl tracking-[-0.6px] uppercase mt-2">
             {siteConfig.projects[1].title}
@@ -76,7 +82,7 @@ export default function BentoGrid() {
             <span className="font-mono font-bold text-[#034694] text-xs tracking-[1.2px] uppercase">
               Inspect_Code
             </span>
-            <img alt="" className="size-[10.5px]" src={imgInspectArrow} />
+            <span className="size-[10.5px] text-[#034694]"><ArrowIcon /></span>
           </a>
         </div>
       </motion.div>
@@ -99,7 +105,7 @@ export default function BentoGrid() {
               </p>
             </div>
             <div className="pt-4 flex items-center justify-between">
-              <img alt="" className="h-[34.5px] w-9" src={imgGlobeIcon} />
+              <span className="h-[34.5px] w-9 text-white"><GlobeIcon /></span>
               <span className="font-mono font-bold text-white text-xs">ACT_LINK: ON</span>
             </div>
           </div>
