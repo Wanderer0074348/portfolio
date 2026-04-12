@@ -160,27 +160,28 @@ export const projectsExtended = {
   plotter: {
     github: "https://github.com/Wanderer0074348/Plotter",
     live: "https://wanderer0074348.github.io/Plotter/#home",
-    video: "",
+    video: "https://pub-b89bbe6de05c4dc4bc02906fe3d45c25.r2.dev/Plotter-demo.mp4",
     motivation:
-      "Data visualization is crucial for understanding complex datasets. Plotter provides an intuitive interface for creating publication-quality charts and interactive visualizations.",
+      "AI Dungeon subscriptions are expensive. Plotter was built as a free, open alternative for interactive storytelling—an AI narrator that remembers your characters, adapts to your decisions, and generates scenes in real-time without paywalls.",
     whitepaper: {
       ref: "0x0071",
-      title: "Interactive Data Visualization Library",
+      title: "Interactive AI Storytelling Platform",
       abstract:
-        "Plotter is a Python-based visualization utility enabling rapid generation of professional charts and graphs from diverse data sources.",
+        "Plotter is an interactive storytelling platform powered by AI that enables writers, game designers, and creative enthusiasts to craft dynamic narratives through real-time conversation. Features include character creation, dialogue interaction, three narrative modes (Act, Speak, See), and AI-generated scene visualization via ComfyUI.",
       architecture:
-        "Built on Matplotlib and Pandas, providing high-level APIs for common visualization patterns with support for custom styling and interactive elements.",
+        "Go backend with Wails framework for cross-platform desktop application. Integrates Ollama for local LLM inference enabling offline storytelling without API dependencies. Three modes enable narrative participation: Act (decision-making), Speak (dialogue), and See (AI image generation via ComfyUI). Character state is persisted and referenced by the AI to maintain continuity and character growth throughout the story.",
       stats: [
-        { key: "SUPPORTED_CHARTS", val: "15+"       },
-        { key: "DATA_FORMATS", val: "CSV, JSON, SQL" },
-        { key: "CUSTOMIZATION", val: "Full"         },
+        { key: "NARRATIVE_MODES", val: "3 (Act, Speak, See)"    },
+        { key: "CHARACTER_MEMORY", val: "Persistent"             },
+        { key: "IMAGE_GENERATION", val: "ComfyUI Integration"    },
+        { key: "SAVE_FUNCTIONALITY", val: "Sessions & Manuscripts"},
       ],
     },
   },
 
   geovisionquest: {
     github: "https://github.com/Wanderer0074348/GeoVisionQuest",
-    live: "",
+    live: "https://www.kaggle.com/competitions/openai-to-z-challenge/writeups/geovisionquest-ai-powered-discovery-of-hidden-geog",
     video: "",
     motivation:
       "Combining geospatial data with computer vision opens new possibilities for location intelligence. GeoVisionQuest was built during a hackathon to demonstrate real-time geographic analysis from visual input.",
