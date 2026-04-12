@@ -160,14 +160,14 @@ export const siteConfig = {
     {
       id: "relay",
       title: "Relay",
-      sector: "AI_DevTools",
+      sector: "DevTools",
       ref: "REF: RELAY-06",
-      stack: ["TypeScript", "Python", "Claude API", "Gemini", "Codex"],
-      desc: "Agent handoff system that seamlessly transfers your full session context from Claude Code to alternative AI agents (Codex, Gemini, Aider) when rate limits are hit.",
+      stack: ["Rust", "Claude API", "Gemini", "Codex", "Aider", "Ollama"],
+      desc: "Universal agent handoff CLI that captures any AI coding tool's session context and intelligently routes to fallback agents, with relevance-based compression, secret detection, and sub-100ms handoff.",
       meta: "Status: Active",
       dotColor: "bg-[#034694]",
       tag: "progress" as const,
-      video: "",
+      video: "https://pub-b89bbe6de05c4dc4bc02906fe3d45c25.r2.dev/relay-demo.mp4",
       report: "",
     },
     {
@@ -193,9 +193,13 @@ export const siteConfig = {
       meta: "Status: Active",
       dotColor: "bg-[#22c55e]",
       tag: "full" as const,
-      video: "",
+      video: "https://pub-b89bbe6de05c4dc4bc02906fe3d45c25.r2.dev/Plotter-demo.mp4",
       report: "",
     },
+  ],
+
+  // ── Hackathon Projects ─────────────────────────────────────────────────────
+  hackathonProjects: [
     {
       id: "geovisionquest",
       title: "GeoVisionQuest",

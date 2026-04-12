@@ -23,10 +23,11 @@ const PROJECT_IMGS: (string | null)[] = [
   null,
 ];
 
-const FILTERS = ["Full_Portfolio", "Projects", "Experience", "Club_Work"] as const;
+const FILTERS = ["Full_Portfolio", "Projects", "Hackathons", "Experience", "Club_Work"] as const;
 type Filter = typeof FILTERS[number];
 
 const lug = siteConfig.leadership[2];
+const { projects, hackathonProjects } = siteConfig;
 
 const COMPANY_IMAGES: Record<string, string> = {
   esri:  "/Esri.png",
@@ -95,7 +96,7 @@ export default function MissionsPage() {
         {activeFilter === "Full_Portfolio" && (
           <div className="flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-10">
 
-            {siteConfig.projects.slice(0, 3).map((p, i) => (
+            {projects.slice(0, 3).map((p, i) => (
               <Link key={p.id} href={`/missions/${p.id}`} className="block group">
                 <div className="bg-white border-[4px] border-black flex flex-col shadow-[8px_8px_0px_0px_black] p-1 isolate group-hover:shadow-[12px_12px_0px_0px_black] transition-shadow">
                   <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
@@ -168,7 +169,7 @@ export default function MissionsPage() {
               </div>
             </div>
 
-            <Link href={`/missions/${siteConfig.projects[3].id}`} className="block group">
+            <Link href={`/missions/${projects[3].id}`} className="block group">
               <div className="bg-white border-[4px] border-black flex flex-col shadow-[8px_8px_0px_0px_black] p-1 isolate group-hover:shadow-[12px_12px_0px_0px_black] transition-shadow h-full">
                 <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
                   <div className="h-[180px] md:h-[207px] relative">
@@ -181,22 +182,22 @@ export default function MissionsPage() {
                     )}
                   </div>
                   <div className="absolute top-4 left-4 bg-black px-2 py-1">
-                    <span className="font-[family-name:var(--font-data)] font-bold text-[#034694] text-xs uppercase">{siteConfig.projects[3].sector}</span>
+                    <span className="font-[family-name:var(--font-data)] font-bold text-[#034694] text-xs uppercase">{projects[3].sector}</span>
                   </div>
                 </div>
                 <div className="p-5 md:p-6 flex flex-col gap-4 flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="font-[family-name:var(--font-data)] font-bold text-[#5e5e5e] text-xs tracking-[-0.6px] uppercase">{siteConfig.projects[3].ref}</span>
-                    <div className={`${siteConfig.projects[3].dotColor} size-3 shrink-0`} />
+                    <span className="font-[family-name:var(--font-data)] font-bold text-[#5e5e5e] text-xs tracking-[-0.6px] uppercase">{projects[3].ref}</span>
+                    <div className={`${projects[3].dotColor} size-3 shrink-0`} />
                   </div>
-                  <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-2xl md:text-[30px] tracking-[-1px] md:tracking-[-1.5px] uppercase leading-tight">{siteConfig.projects[3].title}</h3>
+                  <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-2xl md:text-[30px] tracking-[-1px] md:tracking-[-1.5px] uppercase leading-tight">{projects[3].title}</h3>
                   <div className="flex flex-wrap gap-1">
-                    {siteConfig.projects[3].stack.slice(0, 3).map((t) => (
+                    {projects[3].stack.slice(0, 3).map((t) => (
                       <span key={t} className="font-[family-name:var(--font-data)] text-[#5e5e5e] text-[10px] border border-[#d4d4d4] px-1.5 py-0.5 uppercase">{t}</span>
                     ))}
                   </div>
                   <div className="border-t-[4px] border-black pt-5 md:pt-7 flex items-center justify-between mt-auto">
-                    <span className="font-[family-name:var(--font-data)] font-bold text-[#1a1c1c] text-xs tracking-[1.2px] uppercase">{siteConfig.projects[3].meta}</span>
+                    <span className="font-[family-name:var(--font-data)] font-bold text-[#1a1c1c] text-xs tracking-[1.2px] uppercase">{projects[3].meta}</span>
                     <img alt="" className="size-4" src={imgArrow} />
                   </div>
                 </div>
@@ -221,7 +222,7 @@ export default function MissionsPage() {
         {/* ── Projects ── */}
         {activeFilter === "Projects" && (
           <div className="flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-10">
-            {siteConfig.projects.map((p, i) => (
+            {projects.map((p, i) => (
               <Link key={p.id} href={`/missions/${p.id}`} className="block group">
                 <div className="bg-white border-[4px] border-black flex flex-col shadow-[8px_8px_0px_0px_black] p-1 isolate group-hover:shadow-[12px_12px_0px_0px_black] transition-shadow">
                   <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
@@ -240,6 +241,60 @@ export default function MissionsPage() {
                     </div>
                     <div className="absolute top-4 left-4 bg-black px-2 py-1">
                       <span className="font-[family-name:var(--font-data)] font-bold text-[#034694] text-xs uppercase">
+                        {p.sector}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-5 md:p-6 flex flex-col gap-4 flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-[family-name:var(--font-data)] font-bold text-[#5e5e5e] text-xs tracking-[-0.6px] uppercase">
+                        {p.ref}
+                      </span>
+                      <div className={`${p.dotColor} size-3 shrink-0`} />
+                    </div>
+                    <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-2xl md:text-[30px] tracking-[-1px] md:tracking-[-1.5px] uppercase leading-tight">
+                      {p.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-1">
+                      {p.stack.slice(0, 3).map((t) => (
+                        <span key={t} className="font-[family-name:var(--font-data)] text-[#5e5e5e] text-[10px] border border-[#d4d4d4] px-1.5 py-0.5 uppercase">{t}</span>
+                      ))}
+                    </div>
+                    <div className="border-t-[4px] border-black pt-5 md:pt-7 flex items-center justify-between mt-auto">
+                      <span className="font-[family-name:var(--font-data)] font-bold text-[#1a1c1c] text-xs tracking-[1.2px] uppercase">
+                        {p.meta}
+                      </span>
+                      <img alt="" className="size-4" src={imgArrow} />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* ── Hackathons ── */}
+        {activeFilter === "Hackathons" && (
+          <div className="flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-10">
+            {hackathonProjects.map((p, i) => (
+              <Link key={p.id} href={`/missions/${p.id}`} className="block group">
+                <div className="bg-white border-[4px] border-black flex flex-col shadow-[8px_8px_0px_0px_black] p-1 isolate group-hover:shadow-[12px_12px_0px_0px_black] transition-shadow">
+                  <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
+                    <div className="h-[180px] md:h-[207px] relative">
+                      {PROJECT_IMGS[i] ? (
+                        <img
+                          alt=""
+                          className="absolute inset-0 w-full h-[181%] max-w-none object-cover grayscale top-[-40%]"
+                          src={PROJECT_IMGS[i]}
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#d4d4d4] to-[#a3a3a3] flex items-center justify-center">
+                          <span className="font-[family-name:var(--font-code)] text-[#737373] text-xs uppercase text-center">Image Coming Soon</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="absolute top-4 left-4 bg-black px-2 py-1">
+                      <span className="font-[family-name:var(--font-data)] font-bold text-[#f59e0b] text-xs uppercase">
                         {p.sector}
                       </span>
                     </div>

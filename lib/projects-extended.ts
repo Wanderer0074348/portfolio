@@ -113,22 +113,25 @@ export const projectsExtended = {
   },
 
   relay: {
-    github: "https://github.com/Wanderer0074348/relay",
+    github: "https://github.com/Manavarya09/relay",
     live: "",
     video: "",
     motivation:
-      "AI agents and coding tools have rate limits. When Claude Code hits its ceiling, Relay smoothly hands off your full session context to alternative agents, keeping your workflow uninterrupted.",
+      "AI coding agents hit rate limits unexpectedly, breaking developer flow mid-task. Relay solves this by capturing ANY agent's complete session context—conversation history, file edits, errors, git state—and seamlessly routing to fallback agents without losing progress or requiring re-explanation.",
     whitepaper: {
       ref: "0x006F",
-      title: "Cross-Agent Session Handoff in Relay",
+      title: "Universal Agent Session Compression and Intelligent Handoff",
       abstract:
-        "Relay implements a context-preserving handoff mechanism that enables seamless session transfer between multiple AI agents when rate limits are encountered, maintaining conversation state and execution context across different platforms.",
+        "Relay is a Rust-based CLI that universally captures coding agent session transcripts, applies relevance-based compression scoring, detects and redacts secrets, and performs sub-100ms handoffs to 8+ fallback AI agents (Claude, Gemini, Codex, Aider, Ollama, etc.) with full session preservation.",
       architecture:
-        "Session context is serialized into a portable format and transmitted to target agents (Codex, Gemini, Aider, etc.) via a unified handoff protocol, preserving message history, file state, and execution environment.",
+        "The system abstracts over session transcript formats from multiple agent platforms, capturing every conversation turn, tool call, file edit, and error. A relevance scorer using ML heuristics prioritizes recent/critical context while compressing older turns. Built-in secret detection prevents leaking API keys and credentials. Daemon mode monitors rate limits across agents in real-time, triggering automatic handoffs. Plugin architecture enables custom agent adapters. SQLite analytics track cost estimates and handoff success rates per agent platform.",
       stats: [
-        { key: "SUPPORTED_AGENTS", val: "5+"         },
-        { key: "CONTEXT_PRESERVATION", val: "100%"  },
-        { key: "HANDOFF_LATENCY", val: "<500ms"     },
+        { key: "CODEBASE", val: "95.1% Rust"          },
+        { key: "BINARY_SIZE", val: "~5MB"              },
+        { key: "HANDOFF_SPEED", val: "<100ms"         },
+        { key: "AGENT_SUPPORT", val: "8+ platforms"   },
+        { key: "SECRET_DETECTION", val: "Enabled"     },
+        { key: "CONTEXT_PRESERVATION", val: "100%"    },
       ],
     },
   },
@@ -156,7 +159,7 @@ export const projectsExtended = {
 
   plotter: {
     github: "https://github.com/Wanderer0074348/Plotter",
-    live: "",
+    live: "https://wanderer0074348.github.io/Plotter/#home",
     video: "",
     motivation:
       "Data visualization is crucial for understanding complex datasets. Plotter provides an intuitive interface for creating publication-quality charts and interactive visualizations.",
