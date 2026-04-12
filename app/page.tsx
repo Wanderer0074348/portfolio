@@ -30,7 +30,7 @@ export default function Home() {
             Hey, I&apos;m <span className="text-[#034694]">Tanay</span>
           </h2>
         </div>
-        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20" loading="lazy">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
           <PixelatedCanvas
             src="/hero.png"
             width={960}
