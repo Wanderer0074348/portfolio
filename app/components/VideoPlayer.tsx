@@ -92,6 +92,7 @@ export default function VideoPlayer({ videoUrl, projectTitle, projectTag }: Vide
                 src={poster}
                 alt={projectTitle}
                 className="absolute inset-0 w-full h-full object-cover opacity-60"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-black/40" />
 

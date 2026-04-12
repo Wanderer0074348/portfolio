@@ -142,6 +142,7 @@ export default function MissionsPage() {
                           className="absolute inset-0 w-full h-full max-w-none object-cover"
                           style={{ objectPosition, filter }}
                           src={p.image}
+                          loading="lazy"
                         />
                       ) : (
                         <div className="absolute inset-0 bg-gradient-to-br from-[#d4d4d4] to-[#a3a3a3] flex items-center justify-center">
@@ -192,7 +193,7 @@ export default function MissionsPage() {
               </div>
               <div className="bg-[#171717] border-[4px] border-[#034694] w-full md:w-[233px] md:h-full md:min-h-[280px] relative overflow-hidden flex flex-col">
                 <div className="bg-white">
-                  <img alt="ESRI" className="w-full object-cover" src="/Esri.png" />
+                  <img alt="ESRI" className="w-full object-cover" src="/Esri.png" loading="lazy" />
                 </div>
                 <div className="p-5 flex flex-col gap-3">
                   {[
@@ -286,6 +287,7 @@ export default function MissionsPage() {
                           className="absolute inset-0 w-full h-full max-w-none object-cover"
                           style={{ objectPosition, filter }}
                           src={p.image}
+                          loading="lazy"
                         />
                       ) : (
                         <div className="absolute inset-0 bg-gradient-to-br from-[#d4d4d4] to-[#a3a3a3] flex items-center justify-center">
@@ -398,7 +400,7 @@ export default function MissionsPage() {
               </div>
               <div className="bg-[#171717] border-[4px] border-[#034694] w-full md:w-[233px] md:h-full md:min-h-[280px] relative overflow-hidden flex flex-col">
                 <div className="bg-white">
-                  <img alt="ESRI" className="w-full object-cover" src="/Esri.png" />
+                  <img alt="ESRI" className="w-full object-cover" src="/Esri.png" loading="lazy" />
                 </div>
                 <div className="p-5 flex flex-col gap-3">
                   {[
@@ -503,7 +505,7 @@ function ExperiencePopup({
         <div className="p-6 md:p-8 flex flex-col gap-6">
           {COMPANY_IMAGES[exp.id] && (
             <div className="bg-black border-[3px] border-black overflow-hidden w-1/2 mx-auto">
-              <img alt={exp.org} className="w-full object-cover" src={COMPANY_IMAGES[exp.id]} />
+              <img alt={exp.org} className="w-full object-cover" src={COMPANY_IMAGES[exp.id]} loading="lazy" />
             </div>
           )}
           <div>

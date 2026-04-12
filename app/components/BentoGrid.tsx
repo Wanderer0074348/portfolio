@@ -44,7 +44,7 @@ export default function BentoGrid() {
       <motion.div variants={item(0)} className="md:col-span-8 relative bg-black border-[6px] border-black overflow-hidden p-[6px] shadow-[8px_8px_0px_0px_black] isolate min-h-[360px] md:min-h-0 md:h-[411px]">
         {/* Background Image */}
         <div className="absolute inset-0 z-[1]">
-          <img alt="Samsung Innovation Campus" className="w-full h-full object-cover" src="/SIC.png" />
+          <img alt="Samsung Innovation Campus" className="w-full h-full object-cover" src="/SIC.png" loading="eager" />
           <div className="absolute inset-0 bg-black/70" />
         </div>
 
@@ -115,7 +115,7 @@ export default function BentoGrid() {
       {/* Medium Block — Currently at ESRI */}
       <motion.div variants={item(0.32)} className="md:col-span-8 bg-[#f9f9f9] border-[6px] border-black overflow-hidden shadow-[8px_8px_0px_0px_black] flex flex-col md:flex-row md:h-[275px]">
         <div className="bg-black h-[160px] md:hidden shrink-0">
-          <img alt="ESRI" className="w-full h-full object-cover" src="/Esri.png" />
+          <img alt="ESRI" className="w-full h-full object-cover" src="/Esri.png" loading="lazy" />
         </div>
         <div className="flex-1 p-6 md:p-8 flex flex-col justify-between">
           <div className="flex items-center gap-3">
@@ -136,7 +136,7 @@ export default function BentoGrid() {
           </div>
         </div>
         <div className="hidden md:block bg-black w-[266px] shrink-0">
-          <img alt="ESRI" className="w-full h-full object-cover" src="/Esri.png" />
+          <img alt="ESRI" className="w-full h-full object-cover" src="/Esri.png" loading="lazy" />
         </div>
       </motion.div>
 

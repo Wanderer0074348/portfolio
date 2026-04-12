@@ -61,6 +61,7 @@ export default function DossierPage() {
                   alt="Subject Portrait"
                   className="w-full h-auto"
                   src="/me.png"
+                  loading="lazy"
                 />
               </div>
             </div>
