@@ -33,7 +33,7 @@ export default function BlogsPage() {
           <div className="md:col-span-4 flex flex-col justify-end pl-0 md:pl-1 mt-4 md:mt-0">
             <p className="font-sans text-[#434751] text-base md:text-lg leading-7 md:text-right">
               Notes from the frontier.<br />
-              {siteConfig.name} on {siteConfig.focus[0]},<br />
+              Claude on {siteConfig.focus[0]},<br />
               {siteConfig.focus[1]},<br />
               and whatever else is loud that week.
             </p>
