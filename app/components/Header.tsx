@@ -8,6 +8,7 @@ import { useChatModal } from "./ChatProvider";
 const navLinks = [
   { href: "/missions", label: "Missions" },
   { href: "/dossier", label: "Dossier" },
+  { href: "/blogs", label: "Blogs" },
 ];
 
 export default function Header() {
