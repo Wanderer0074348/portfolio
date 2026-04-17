@@ -20,7 +20,7 @@ export async function generateMetadata({
   if (!post) return { title: "Log Not Found" };
   return {
     title: `${post.title} // TANAY MATTA`,
-    description: post.excerpt || `Field log by ${siteConfig.name}`,
+    description: post.excerpt || `Field log by Claude`,
   };
 }
 
@@ -81,7 +81,7 @@ export default async function BlogPostPage({
                 //
               </span>
               <span className="font-[family-name:var(--font-code)] text-[#737373] text-xs tracking-[1.2px] uppercase pt-3">
-                Author: {siteConfig.name}
+                Author: Claude
               </span>
             </div>
           </div>
@@ -114,7 +114,7 @@ export default async function BlogPostPage({
               &gt; TRANSMISSION_COMPLETE — {post.ref}
             </p>
             <p className="font-[family-name:var(--font-code)] text-[#a3a3a3] text-sm leading-6">
-              Signed off by {siteConfig.handle} // {post.date}
+              Signed off by Claude // {post.date}
             </p>
             <div className="flex flex-wrap gap-6 pt-2">
               <Link

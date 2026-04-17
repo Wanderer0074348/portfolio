@@ -9,6 +9,7 @@ export type BlogPost = {
   tag: string;
   readTime: string;
   excerpt: string;
+  pinned: boolean;
   content: string;
 };
 
@@ -51,11 +52,15 @@ export function getAllBlogs(): BlogPost[] {
       tag: meta.tag ?? "GENERAL",
       readTime: meta.readTime ?? "5 min",
       excerpt: meta.excerpt ?? "",
+      pinned: meta.pinned === "true",
       content: body,
     } satisfies BlogPost;
   });
 
-  return posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+  return posts.sort((a, b) => {
+    if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
+    return a.date < b.date ? 1 : -1;
+  });
 }
 
 export function getBlogBySlug(slug: string): BlogPost | null {

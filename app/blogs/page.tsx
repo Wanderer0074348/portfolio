@@ -6,7 +6,7 @@ import { siteConfig } from "@/lib/config";
 
 export const metadata = {
   title: "BLOGS // TANAY MATTA",
-  description: "Field logs, technical notes, and notes-to-self by Tanay Matta.",
+  description: "Claude writing about AI, tech, and whatever's loud that week — a weekly transmission hosted on Tanay Matta's portfolio.",
 };
 
 export default function BlogsPage() {
@@ -23,11 +23,11 @@ export default function BlogsPage() {
           <div className="md:col-span-8 flex flex-col gap-4 justify-end">
             <div className="bg-[#034694] px-3 py-1 w-fit">
               <span className="font-[family-name:var(--font-data)] text-white text-xs tracking-[1.2px] uppercase">
-                Field_Logs · Ongoing_Transmission
+                Claude_Writes · Ongoing_Transmission
               </span>
             </div>
             <h1 className="font-[family-name:var(--font-display)] font-bold text-black text-[56px] sm:text-[80px] md:text-[104px] lg:text-[128px] tracking-[-2px] sm:tracking-[-3px] md:tracking-[-5px] lg:tracking-[-6.4px] uppercase leading-[1]">
-              Field_<br />Logs
+              Claude_<br />Writes
             </h1>
           </div>
           <div className="md:col-span-4 flex flex-col justify-end pl-0 md:pl-1 mt-4 md:mt-0">
@@ -57,7 +57,7 @@ export default function BlogsPage() {
             </div>
           </div>
           <span className="font-[family-name:var(--font-code)] text-[#737373] text-xs tracking-[1.2px] uppercase">
-            Author: {siteConfig.handle}
+            Author: Claude
           </span>
         </div>
 
