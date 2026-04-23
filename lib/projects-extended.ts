@@ -138,21 +138,21 @@ export const projectsExtended = {
 
   resbook: {
     github: "https://github.com/Wanderer0074348/ResBook",
-    live: "",
+    live: "https://res-book-gray.vercel.app/",
     video: "",
     motivation:
-      "Restaurant reservations shouldn't be complicated. ResBook streamlines the entire booking experience for customers while providing managers with powerful tools to optimize seating, staffing, and operations.",
+      "The AI tooling landscape is fragmented, noisy, and mostly ad copy. ResBook is the opposite — an opinionated index of what's actually worth using, with executable workflows, verdicts you can disagree with, and configs you can copy. Part manual, part curation layer, fully built in public.",
     whitepaper: {
       ref: "0x0070",
-      title: "Restaurant Management Platform Architecture",
+      title: "The AI Ops Manual",
       abstract:
-        "ResBook is a full-stack restaurant reservation and management system providing real-time booking, table optimization, and operational analytics.",
+        "ResBook is a curated, opinionated directory of AI tools, executable workflows, and developer configurations. Markdown-driven content surfaces verdicts, step-by-step workflows, and dotfiles; a workflow runner tracks completion; an AI chat assistant answers natural-language queries across the corpus; a personal stack builder lets readers compose and export their own toolchain.",
       architecture:
-        "React frontend with TypeScript for responsive UI, Node.js backend with PostgreSQL for reliable data persistence, real-time updates via WebSocket.",
+        "Next.js 15 App Router with React 19 and Tailwind v4 on the frontend. Content lives as .mdx files in /content (tools · workflows · dotfiles) processed via next-mdx-remote, with custom MDX components like <Verdict> and <WorkflowStep> for opinionated formatting. Static site generation keeps it fast and cheap to host; client-side search keeps it usable. v2.0 added community submissions, endorsement voting, analytics, and the AI chat layer.",
       stats: [
-        { key: "MODULES", val: "Booking, Analytics, Staffing" },
-        { key: "TECH_STACK", val: "MERN"                      },
-        { key: "RESPONSE_TIME", val: "<100ms"                 },
+        { key: "CONTENT",   val: "Tools · Workflows · Dotfiles"     },
+        { key: "STACK",     val: "Next.js 15 · MDX · React 19"      },
+        { key: "FEATURES",  val: "Chat · Runner · Stack Builder"    },
       ],
     },
   },
