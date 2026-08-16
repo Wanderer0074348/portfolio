@@ -112,10 +112,10 @@ export default function BentoGrid() {
         </Link>
       </motion.div>
 
-      {/* Medium Block — Currently at ESRI */}
+      {/* Medium Block — Currently at Deriv */}
       <motion.div variants={item(0.32)} className="md:col-span-8 bg-[#f9f9f9] border-[6px] border-black overflow-hidden shadow-[8px_8px_0px_0px_black] flex flex-col md:flex-row md:h-[275px]">
-        <div className="bg-black h-[160px] md:hidden shrink-0">
-          <img alt="ESRI" className="w-full h-full object-cover" src="/Esri.png" loading="lazy" />
+        <div className="bg-black h-[160px] md:hidden shrink-0 border-b-[6px] border-black">
+          <img alt="Deriv" className="w-full h-full object-cover" src="/Deriv.png" loading="lazy" />
         </div>
         <div className="flex-1 p-6 md:p-8 flex flex-col justify-between">
           <div className="flex items-center gap-3">
@@ -128,15 +128,15 @@ export default function BentoGrid() {
           </div>
           <div className="flex flex-col gap-2">
             <h3 className="font-[family-name:var(--font-display)] font-bold text-[#1a1c1c] text-2xl md:text-[30px] tracking-[-1px] md:tracking-[-1.5px] uppercase leading-tight md:leading-9">
-              Interning at ESRI
+              Interning at Deriv
             </h3>
             <p className="font-sans font-normal text-[#5e5e5e] text-sm leading-5">
               {siteConfig.experience[0].title} · {siteConfig.experience[0].org} · {siteConfig.experience[0].location}
             </p>
           </div>
         </div>
-        <div className="hidden md:block bg-black w-[266px] shrink-0">
-          <img alt="ESRI" className="w-full h-full object-cover" src="/Esri.png" loading="lazy" />
+        <div className="hidden md:block bg-black w-[266px] shrink-0 border-l-[6px] border-black">
+          <img alt="Deriv" className="w-full h-full object-cover" src="/Deriv.png" loading="lazy" />
         </div>
       </motion.div>
 

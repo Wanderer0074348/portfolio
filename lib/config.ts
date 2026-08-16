@@ -53,12 +53,23 @@ export const siteConfig = {
   // ── Experience ─────────────────────────────────────────────────────────────
   experience: [
     {
+      id: "deriv",
+      title: "AI Engineer Intern",
+      org: "Deriv",
+      location: "Dubai, UAE",
+      period: "Jul. 2026 – Current",
+      tag: "progress" as const,
+      bullets: [
+        "Joined Deriv's AI engineering team — details to follow.",
+      ],
+    },
+    {
       id: "esri",
       title: "Software Development (AI) Intern",
       org: "ESRI Global",
       location: "Sharjah, UAE",
-      period: "Feb. 2026 – Present",
-      tag: "progress" as const,
+      period: "Feb. 2026 – Jul. 2026",
+      tag: "archived" as const,
       bullets: [
         "Architected multi-agent invocation support for the ArcGIS RFT AI Assistant, enabling a single query to concurrently dispatch to multiple specialized agents, eliminating a core bottleneck.",
         "Engineered a context-management pipeline reducing token consumption by ~18% (110k → 90k tokens) through optimized prompt pruning and persistent chat history across conversation turns.",
@@ -340,7 +351,7 @@ export const siteConfig = {
   // ── Home page stats ────────────────────────────────────────────────────────
   stats: [
     { value: "9.35", label: "CGPA" },
-    { value: "3+", label: "Internships" },
+    { value: "4+", label: "Internships" },
     { value: "5+", label: "Projects" },
     { value: "ACTIVE", label: "Status", highlight: true },
   ],

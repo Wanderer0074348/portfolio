@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { siteConfig } from "@/lib/config";
@@ -62,6 +63,7 @@ const lug = siteConfig.leadership[2];
 const { projects, hackathonProjects } = siteConfig;
 
 const COMPANY_IMAGES: Record<string, string> = {
+  deriv: "/Deriv.png",
   esri:  "/Esri.png",
   ymt:   "/YMT.png",
   kptac: "/KPTAC.png",
@@ -137,12 +139,13 @@ export default function MissionsPage() {
                   <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
                     <div className="h-[180px] md:h-[207px] relative">
                       {p.image ? (
-                        <img
+                        <Image
                           alt={p.title}
-                          className="absolute inset-0 w-full h-full max-w-none object-cover"
+                          fill
+                          sizes="(min-width: 768px) 33vw, 100vw"
+                          className="object-cover"
                           style={{ objectPosition, filter }}
                           src={p.image}
-                          loading="lazy"
                         />
                       ) : (
                         <div className="absolute inset-0 bg-gradient-to-br from-[#d4d4d4] to-[#a3a3a3] flex items-center justify-center">
@@ -193,15 +196,15 @@ export default function MissionsPage() {
               </div>
               <div className="bg-[#171717] border-[4px] border-[#034694] w-full md:w-[233px] md:h-full md:min-h-[280px] relative overflow-hidden flex flex-col">
                 <div className="bg-white">
-                  <img alt="ESRI" className="w-full object-cover" src="/Esri.png" loading="lazy" />
+                  <img alt="Deriv" className="w-full object-cover" src="/Deriv.png" loading="lazy" />
                 </div>
                 <div className="p-5 flex flex-col gap-3">
                   {[
                     { text: ">> ROLE_VITALS",       color: "text-white"     },
-                    { text: "ORG: ESRI_GLOBAL",      color: "text-[#034694]" },
-                    { text: "ROLE: AI_INTERN",        color: "text-[#034694]" },
-                    { text: "LOCATION: SHARJAH_UAE", color: "text-[#034694]" },
-                    { text: "SINCE: FEB.2026",        color: "text-[#034694]" },
+                    { text: "ORG: DERIV",            color: "text-[#034694]" },
+                    { text: "ROLE: AI_ENGINEER_INTERN", color: "text-[#034694]" },
+                    { text: "LOCATION: DUBAI_UAE",   color: "text-[#034694]" },
+                    { text: "SINCE: JUL.2026",        color: "text-[#034694]" },
                     { text: "STATUS: ACTIVE",         color: "text-[#034694]" },
                     { text: "> _",                    color: "text-[#034694]" },
                   ].map(({ text, color }, i) => (
@@ -219,9 +222,11 @@ export default function MissionsPage() {
                   <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
                     <div className="h-[180px] md:h-[207px] relative">
                       {projects[7].image ? (
-                        <img
+                        <Image
                           alt={projects[7].title}
-                          className="absolute inset-0 w-full h-full max-w-none object-cover"
+                          fill
+                          sizes="(min-width: 768px) 33vw, 100vw"
+                          className="object-cover"
                           style={{ objectPosition, filter }}
                           src={projects[7].image}
                         />
@@ -282,12 +287,13 @@ export default function MissionsPage() {
                   <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
                     <div className="h-[180px] md:h-[207px] relative">
                       {p.image ? (
-                        <img
+                        <Image
                           alt={p.title}
-                          className="absolute inset-0 w-full h-full max-w-none object-cover"
+                          fill
+                          sizes="(min-width: 768px) 33vw, 100vw"
+                          className="object-cover"
                           style={{ objectPosition, filter }}
                           src={p.image}
-                          loading="lazy"
                         />
                       ) : (
                         <div className="absolute inset-0 bg-gradient-to-br from-[#d4d4d4] to-[#a3a3a3] flex items-center justify-center">
@@ -333,9 +339,11 @@ export default function MissionsPage() {
                   <div className="relative border-b-[4px] border-black overflow-hidden bg-[#e8e8e8]">
                     <div className="h-[180px] md:h-[207px] relative">
                       {p.image ? (
-                        <img
+                        <Image
                           alt={p.projectTitle}
-                          className="absolute inset-0 w-full h-full max-w-none object-cover"
+                          fill
+                          sizes="(min-width: 768px) 33vw, 100vw"
+                          className="object-cover"
                           src={p.image}
                         />
                       ) : (
@@ -400,15 +408,15 @@ export default function MissionsPage() {
               </div>
               <div className="bg-[#171717] border-[4px] border-[#034694] w-full md:w-[233px] md:h-full md:min-h-[280px] relative overflow-hidden flex flex-col">
                 <div className="bg-white">
-                  <img alt="ESRI" className="w-full object-cover" src="/Esri.png" loading="lazy" />
+                  <img alt="Deriv" className="w-full object-cover" src="/Deriv.png" loading="lazy" />
                 </div>
                 <div className="p-5 flex flex-col gap-3">
                   {[
                     { text: ">> ROLE_VITALS",       color: "text-white"     },
-                    { text: "ORG: ESRI_GLOBAL",      color: "text-[#034694]" },
-                    { text: "ROLE: AI_INTERN",        color: "text-[#034694]" },
-                    { text: "LOCATION: SHARJAH_UAE", color: "text-[#034694]" },
-                    { text: "SINCE: FEB.2026",        color: "text-[#034694]" },
+                    { text: "ORG: DERIV",            color: "text-[#034694]" },
+                    { text: "ROLE: AI_ENGINEER_INTERN", color: "text-[#034694]" },
+                    { text: "LOCATION: DUBAI_UAE",   color: "text-[#034694]" },
+                    { text: "SINCE: JUL.2026",        color: "text-[#034694]" },
                     { text: "STATUS: ACTIVE",         color: "text-[#034694]" },
                     { text: "> _",                    color: "text-[#034694]" },
                   ].map(({ text, color }, i) => (
